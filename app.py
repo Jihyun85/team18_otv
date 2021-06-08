@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb://52.79.108.38', 27017, username="test", password="test")
+client = MongoClient('localhost', 27017)
 db = client.team18_OTV
 
 SECRET_KEY = 'team18' # 변경하였습니다
@@ -17,8 +17,18 @@ SECRET_KEY = 'team18' # 변경하였습니다
 @app.route('/')
 def home():
     webtoons = list(db.webtoons.find({}, {'_id': False}))
-    print(webtoons)
     return render_template('index.html', webtoons=webtoons)
+
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])  # 페이로드에서
+        user_info = db.users.find_one({"username": payload["id"]})  # 아이디 정보 꺼내와서
+        return render_template('index.html', user_info=user_info)  # 클라이언트에 전달달
+
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    # except jwt.exceptions.DecodeError:
+    #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/login')
 def login():
@@ -30,7 +40,7 @@ def join():
 
 @app.route('/webtoons/<id>')
 def webtoon(id):
-    my_webtoon = db.team18_OTV.find_one({'id': int(id)})
+    my_webtoon = db.webtoons.find_one({'id': int(id)})
     if my_webtoon is not None:
         return render_template('detail.html', webtoon=my_webtoon)
     else:

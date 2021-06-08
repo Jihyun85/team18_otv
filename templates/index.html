@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>홈 | 오툰뷰</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <!-- Font Awesome CSS -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        function sign_out() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href='/login'
+        }
+    </script>
 </head>
 <body>
-    <a href="/login">로그인하기</a> <!--로그아웃하기-->
+
     <div class="header">
         <div class="my_info">00님 환영합니다.</div>
-        <div><button type="button">Logout</button></div>
+        <div><button onclick="sign_out()" type="button">Logout</button></div>
     </div>
     <div>
         오.튠.뷰<span>오늘의 웹툰 리뷰!</span>

@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from pymongo import MongoClient
-client = MongoClient('mongodb://52.79.108.38', 27017, username="test", password="test")
+client = MongoClient('mongodb://15.164.164.43', 27017, username="test", password="test")
 db = client.team18_OTV
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
