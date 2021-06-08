@@ -40,6 +40,7 @@ for div in weekDays:
             'kind' : kind,
             'summary' : summary,
             'url' : url,
+            'likes' : 0,
             'id' : j
         }
         name = db.webtoons.find_one({'title':title})
