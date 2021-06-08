@@ -14,6 +14,7 @@ soup = BeautifulSoup(data.text, 'html.parser')
 
 weekDays = soup.select('#content > div.list_area.daily_all > div')
 
+j = 1
 for div in weekDays:
     i = 0
     data_ = requests.get('https://comic.naver.com/webtoon/weekday.nhn', headers=headers)
@@ -31,6 +32,7 @@ for div in weekDays:
         kind = soup__.select_one('#content > div.comicinfo > div.detail > p.detail_info > span.genre').text
         summary = soup__.select_one('#content > div.comicinfo > div.detail > p:nth-child(2)').text
         url = 'https://comic.naver.com'+a
+        id = j
         doc = {
             'image' : image,
             'title' : title,
@@ -38,11 +40,13 @@ for div in weekDays:
             'kind' : kind,
             'summary' : summary,
             'url' : url,
-            'likes' : 0
+            'likes' : 0,
+            'id' : j
         }
         name = db.team18_OTV.find_one({'title':title})
         if name is None:
             db.team18_OTV.insert_one(doc)
+            j += 1
         i += 1
         if i > 14:
             break
