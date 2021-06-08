@@ -40,12 +40,11 @@ for div in weekDays:
             'kind' : kind,
             'summary' : summary,
             'url' : url,
-            'likes' : 0,
             'id' : j
         }
-        name = db.team18_OTV.find_one({'title':title})
+        name = db.webtoons.find_one({'title':title})
         if name is None:
-            db.team18_OTV.insert_one(doc)
+            db.webtoons.insert_one(doc)
             j += 1
         i += 1
         if i > 14:
