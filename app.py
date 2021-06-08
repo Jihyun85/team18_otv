@@ -1,14 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, request
 from pymongo import MongoClient
 
+import jwt
+import datetime
+import hashlib
+
+from datetime import datetime, timedelta
+
 app = Flask(__name__)
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://52.79.108.38', 27017, username="test", password="test")
 db = client.team18_OTV
 
-import jwt
-
-SECRET_KEY = "SPARTA" # 변경 필요
+SECRET_KEY = 'team18' # 변경하였습니다
 
 @app.route('/')
 def home():
@@ -66,6 +70,57 @@ def like_webtoon():
 
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
+    # 로그인
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
+    # 찾으면
+    if result is not None:
+        payload = {
+            'id': username_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)
+            # 로그인 24시간 유지, datetime.utcnow() 지금부터 + timedelta(seconds=60초*60분*24시간)
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')  # 토큰 암호화?
+
+        return jsonify({'result': 'success', 'token': token})  # 클라이언트에게 토큰 던져주기
+    # 찾지 못하면
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+@app.route('/join/sign_up/save', methods=['POST'])
+def sign_up():
+    username_receive = request.form['username_give']
+    nickname_receive = request.form['nickname_give']
+    password_receive = request.form['password_give']
+    password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    doc = {
+        "username": username_receive,  # 아이디
+        "nickname": nickname_receive,  # 닉네임
+        "password": password_hash,  # 비밀번호
+
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': 'success'})
+
+# 중복확인(회원가입-아이디)
+@app.route('/join/sign_up/check_dup_id', methods=['POST'])
+def check_dup_id():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"username": username_receive}))  # 기존 id 있으면 true, 없으면 false
+    return jsonify({'result': 'success', 'exists': exists})
+
+# 중복확인(회원가입-닉네임)
+@app.route('/join/sign_up/check_dup_nickname', methods=['POST'])
+def check_dup_nickname():
+    nickname_receive = request.form['nickname_give']
+    exists = bool(db.users.find_one({"nickname": nickname_receive}))  # 기존 nickname 있으면 true, 없으면 false
+    return jsonify({'result': 'success', 'exists': exists})
 
 
 if __name__ == '__main__':

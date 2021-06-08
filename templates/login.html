@@ -3,8 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인 | 오툰뷰</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        function sign_in() {
+            let username = $("#input-username").val()
+            let password = $("#input-password").val()
+
+            if (username == "") {
+                $("#help-id-login").text("아이디를 입력해주세요.")
+                $("#input-username").focus()
+                return;
+            } else {
+                $("#help-id-login").text("")
+            }
+
+            if (password == "") {
+                $("#help-password-login").text("비밀번호를 입력해주세요.")
+                $("#input-password").focus()
+                return;
+            } else {
+                $("#help-password-login").text("")
+            }
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        $.cookie('mytoken', response['token'], {path: '/'}); //cookie 브라우저 데이터베이스(키-밸류형태로 저장) mytoken이라는 '키'가 실제 서버가 발행한 jwt토큰(response[token])을 저장하고 있다고 하고
+                        alert('로그인 성공!')
+                        window.location.replace("/")
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
+        }
+    </script>
+
+
+
 </head>
 <body>
-  로그인
+    <section class="header">
+        <div class="titile-box">
+            <h1 class="title">OTV</h1>
+            <h3 class="subtitle">웹툰, 무엇이든 추천해드립니다.</h3>
+        </div>
+    </section>
+    <section class="login-section">
+        <div class="login-container">
+            <div class="box">
+                <div class="id-box control has-icons-left"> <!--아이디-->
+                    <input id="input-username" class="input" type="text" placeholder="아이디">
+                    <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                </div>
+                <div class="password-box control has-icons-left">
+                    <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                </div>
+                <div id="sign-in-or-up-box" class="has-text-centered">
+                    <nav class="level is-mobile">
+                        <button class="level-item open-login-button" onclick="sign_in()">
+                            로그인
+                        </button>
+                    </nav>
+                    <hr>
+                    <h4>아직 회원이 아니시라면</h4>
+                    <nav class="level is-mobile">
+                        <button class="level-item open-login-button" onclick="window.location.href='/join'">회원가입</button>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
 </body>
 </html>
