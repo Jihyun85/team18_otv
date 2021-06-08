@@ -12,7 +12,9 @@ SECRET_KEY = "SPARTA" # 변경 필요
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    webtoons = list(db.webtoons.find({}, {'_id': False}))
+    print(webtoons)
+    return render_template('index.html', webtoons=webtoons)
 
 @app.route('/login')
 def login():
@@ -29,6 +31,8 @@ def webtoon(id):
         return render_template('detail.html', webtoon=my_webtoon)
     else:
         return redirect(url_for('home'))
+
+
 
 @app.route('/api/likes', methods=['POST'])
 def like_webtoon():

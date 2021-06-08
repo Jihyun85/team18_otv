@@ -26,9 +26,9 @@
     </div>
     <div class="cardBox">
         {% for j in range(3,webtoons|length) %}
-            {% set image = webtoons[i]['image'] %}
-            {% set title = webtoons[i]['title'] %}
-            {% set likes = webtoons[i]['likes'] %}
+            {% set image = webtoons[j]['image'] %}
+            {% set title = webtoons[j]['title'] %}
+            {% set likes = webtoons[j]['likes'] %}
             <div class="card">
                 <div><img src="{{ image }}" alt="{{ title }}"></div>
                 <p>{{ title }}<span>추천 : {{ likes }}</span></p>
