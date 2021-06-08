@@ -5,6 +5,34 @@
     <title>{{ webtoon.title }} | 오툰뷰</title>
 </head>
 <body>
-오툰뷰
+    <div class="header">
+        <div class="my_info">00님 환영합니다.</div>
+        <div><button type="button">Logout</button></div>
+    </div>
+    <div class="detail">
+        <div><img src="{{ webtoon['image'] }}" alt="{{ webtoon['title'] }}"></div>
+        <div>{{ webtoon['title'] }} <span>{{ webtoon['author'] }}</span></div>
+        <div>{{ webtoon['kind'] }}</div>
+        <div>{{ webtoon['summary'] }}</div>
+        <div>추천 : {{ webtoon['likes'] }} <span><button type="button">추천</button></span></div>
+    </div>
+    <div class="reviewForm">
+        <form action="">
+            <label>Review</label><br>
+            <textarea name="review">내용을 입력해주세요.</textarea>
+            <input type="submit" name="createRiview" value="submit">
+        </form>
+    </div>
+    <div class="reviews">
+        {% for review in reviews %}
+            {% set userName = review['name'] %}
+            {% set comment = review['comment'] %}
+                <div>
+                    <div>{{ userName }}</div>
+                    <div>{{ comment }}</div>
+                    <div><button type="button">삭제</button></div>
+                </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

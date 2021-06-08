@@ -5,6 +5,35 @@
     <title>홈 | 오툰뷰</title>
 </head>
 <body>
-    main페이지
+    <div class="header">
+        <div class="my_info">00님 환영합니다.</div>
+        <div><button type="button">Logout</button></div>
+    </div>
+    <div>
+        오.튠.뷰<span>오늘의 웹툰 리뷰!</span>
+    </div>
+    <div class="topBox">
+        <div>Today's top3</div>
+        {% for i in range(3) %}
+            {% set image = webtoons[i]['image'] %}
+            {% set title = webtoons[i]['title'] %}
+            {% set likes = webtoons[i]['likes'] %}
+            <div class="topCard">
+                <div><img src="{{ image }}" alt="{{ title }}"></div>
+                <p>{{ title }}<span>추천 : {{ likes }}</span></p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="cardBox">
+        {% for j in range(3,webtoons|length) %}
+            {% set image = webtoons[i]['image'] %}
+            {% set title = webtoons[i]['title'] %}
+            {% set likes = webtoons[i]['likes'] %}
+            <div class="card">
+                <div><img src="{{ image }}" alt="{{ title }}"></div>
+                <p>{{ title }}<span>추천 : {{ likes }}</span></p>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
