@@ -13,9 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 </head>
-
 <body>
     <div class="header">
         <div class="my_info">00님 환영합니다.</div>
@@ -38,22 +36,24 @@
 
     </div>
     <div class="reviewForm">
-        <form action="">
-            <label>Review</label><br>
-            <textarea name="review">내용을 입력해주세요.</textarea>
-            <input type="submit" name="createRiview" value="submit">
+        <form id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
+            <label for="textarea-post">Review</label>
+            <textarea id="textarea-post" name="review" placeholder="내용을 입력해주세요"></textarea>
+            <button type="submit">제출</button>
         </form>
     </div>
-    <div class="reviews">
+    <div id="reviewsContainer" class="reviews">
         {% for review in reviews %}
-            {% set userName = review['name'] %}
-            {% set comment = review['comment'] %}
-                <div>
-                    <div>{{ userName }}</div>
-                    <div>{{ comment }}</div>
-                    <div><button type="button">삭제</button></div>
+            {% set userName = review['username'] %}
+            {% set comment = review['text'] %}
+                <div class="review-card">
+                    <span><strong>{{ userName }}</strong></span>
+                    <p>{{ comment }}</p>
+                    <button type="button">삭제</button>
                 </div>
         {% endfor %}
     </div>
+    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
+
 </body>
 </html>

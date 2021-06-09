@@ -58,7 +58,10 @@ def webtoon(id):
         check_like = db.likes.find_one({'webtoon_id': str(id), 'username': user_info['username']}) != None
 
         if my_webtoon is not None:
-            return render_template('detail.html', webtoon=my_webtoon, check_like=check_like)
+            # reviews 불러오기
+            reviews = list(db.reviews.find({'webtoon_id': int(id)}, {'_id': False}))
+
+            return render_template('detail.html', webtoon=my_webtoon, check_like=check_like, reviews=reviews)
         else:
             return redirect(url_for('home'))
     except jwt.ExpiredSignatureError:
@@ -166,30 +169,16 @@ def review_post(id):
             "username": user_info["username"],
             "text": text_receive,
             "date": date_receive,
-            "webtoon_id": int(id) #삭제 기능 추가 희망
+            "webtoon_id": int(id), #삭제 기능 추가 희망
         }
 
         db.reviews.insert_one(doc)
-        return jsonify({"result": "success", 'msg': '포스팅 성공!'})
+
+        return jsonify({"result": {
+            "username": user_info["username"]
+        }})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
-
-
-@app.route("/reviews/<id>", methods=['GET'])  # 리뷰 불러오기
-def review_get(id):
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
-        reviews = list(db.reviews.find({"webtoon_id": int(id)}))
-        print(reviews)
-
-        for review in reviews:
-            review["_id"] = str(review["_id"])
-        return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", "reviews": reviews})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
