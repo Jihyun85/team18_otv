@@ -1,1 +1,218 @@
-/*detail*/
+/*detail*//*detail*/
+* {
+    font-family: 'Noto Serif KR', serif;
+}
+.container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+}
+
+.main-header .my-info {
+    display: flex;
+    align-items: center;
+}
+.wrap {
+    background: #fff;
+    width: 1000px;
+    margin: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.detail-box {
+    display: flex;
+}
+.detail-image {
+    width: 40%;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.detail {
+    width: 60%;
+    height: 320px;
+}
+
+
+@media (max-width: 1020px) {
+    .wrap {width: 100%;}
+}
+@media (max-width: 768px) {
+    .wrap {width: 100%;}
+}
+@media (max-width: 480px) {
+    .wrap {width: 100%;}
+    .detail-box {display: none;}
+    .detail-image {width: 100%;}
+    .detail {width: 100%;}
+}
+
+/*-----------------------------------*/
+.review-form {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+}
+.reviews {
+    width: 100%;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    /*align-content: space-around;*/
+}
+
+/*---------------------------*/
+.image {
+    width: 300px;
+    height: 240px;
+}
+.title-box {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+/*    line-height: 40px;*/
+/*    height: 40px;*/
+    padding: 50px;
+    padding-bottom: 10px;
+}
+.title {
+    var(--font-size-lg);
+    line-height: 30px;
+}
+.author {
+    var(--font-sizw-md);
+    line-height: 30px;
+}
+.genre {
+    var(--font-size-sm);
+    /*    line-height: 20px;*/
+/*    height: 20px;*/
+    padding-left: 50px;
+    color: gray;
+}
+.summary {
+    var(--font-size-md);
+    padding: 50px;
+    height: 140px;
+    font-size: 18px;
+    line-height: 22px;
+/*    width: 80%;*/
+}
+.likes-container {
+    padding-left: 50px;
+}
+.heart {
+    color: red;
+}
+
+/*----------------------*/
+.form {
+    width: 82%;
+    height: 80%;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.review-container {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+.review-card {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.review-card:hover {
+    height: 95%;
+}
+.form,
+.review-card {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    margin: auto;
+}
+
+/*----------------------------------------*/
+.form-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
+    width: 78%;
+}
+.form-lbl {
+    padding-left: 5px;
+    font-size: 18px;
+}
+.textarea {
+    width: 100%;
+    height: 70px;
+    padding: 0px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+    var(--fond-size-md);
+}
+/*.form-btn {*/
+/*    width: 100px;*/
+/*    height: 70px;*/
+/*    !*box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;*!*/
+/*    background-color: #0068be;*/
+/*    !*border-radius: 10px;*!*/
+/*    color: #fff;*/
+/*    margin: 38px 0px 12px;*/
+/*    !*var(--font-size-lg);*!*/
+/*}*/
+.form-btn {
+    width: 100px;
+    height: 74px;
+    /*box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;*/
+    /*background-color: #0068be;*/
+    background-color: #006bea;
+    border-radius: 10px;
+    color: #fff;
+    margin: 36px 0px 10px;
+    /*var(--font-size-lg);*/
+    font-size: 20px;
+}
+.form-btn:hover {
+
+    background-color: #6498ff;
+
+    /*var(--font-size-lg);*/
+
+}
+
+/*----------------------------------------*/
+
+.review-name {
+    padding: 30px;
+}
+.review-text {
+
+}
+.review-btn {
+    padding: 30px;
+}
+.delete {
+    background-color: #90caf9;
+    margin: 0px 30px 0px 30px;
+}
