@@ -1,4 +1,11 @@
 const reviewForm = document.getElementById('reviewForm');
+const reviewDeleteBtn = document.querySelectorAll('.review-delete-btn');
+
+window.onpageshow = function(event) {
+    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        location.reload();
+    }
+}
 
 function toggle_like(id) {
     const likes = document.querySelectorAll('.likes');
@@ -58,12 +65,13 @@ function saveReview(e) {
         success: function(res) {
             const reviewsContainer = document.getElementById('reviewsContainer');
             const reviewCards = document.querySelectorAll('.review-card');
-            const {username} = res.result;
+            const {username, _id: objectNum} = res.result;
             const div = document.createElement('div');
+            div.setAttribute('data-dbnum', objectNum)
             let html_temp = `
                         <strong>${username}</strong>
                         <p>${review}</p>
-                        <button type="button">삭제</button>`;
+                        <button class="review-delete-btn" type="button">삭제</button>`;
             div.innerHTML = html_temp;
 
             // 시간 역순으로 보이게 만들기 위해 구현한 코드(서버 측에서 정렬이 되지 않아 주석처리)
@@ -78,10 +86,17 @@ function saveReview(e) {
     })
 }
 
+function deleteReview(id) {
+    console.log('delete!');
+}
+
 
 function init() {
     if (reviewForm) {
         reviewForm.addEventListener("submit", (e) => saveReview(e));
+    }
+    if (reviewDeleteBtn.length > 0) {
+        reviewDeleteBtn.forEach((btn) => btn.addEventListener("click", (id) => deleteReview(id)))
     }
 }
 
