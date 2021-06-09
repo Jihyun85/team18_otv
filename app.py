@@ -152,6 +152,44 @@ def check_dup_nickname():
     exists = bool(db.users.find_one({"nickname": nickname_receive}))  # 기존 nickname 있으면 true, 없으면 false
     return jsonify({'result': 'success', 'exists': exists})
 
+@app.route('/api/reviews/<id>', methods=['POST'])  #리뷰 포스트
+def review_post(id):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+
+        text_receive = request.form["text_give"]
+        date_receive = request.form["date_give"]
+
+        doc = {
+            "username": user_info["username"],
+            "text": text_receive,
+            "date": date_receive,
+            "webtoon_id": int(id) #삭제 기능 추가 희망
+        }
+
+        db.reviews.insert_one(doc)
+        return jsonify({"result": "success", 'msg': '포스팅 성공!'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+
+
+@app.route("/reviews/<id>", methods=['GET'])  # 리뷰 불러오기
+def review_get(id):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        reviews = list(db.reviews.find({"webtoon_id": int(id)}))
+        print(reviews)
+
+        for review in reviews:
+            review["_id"] = str(review["_id"])
+        return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", "reviews": reviews})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
