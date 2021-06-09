@@ -16,6 +16,15 @@ button {
     font-family: 'Noto Serif KR', serif;
 }
 
+a,
 button {
     cursor: pointer;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
 }
