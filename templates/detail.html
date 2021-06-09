@@ -7,108 +7,80 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-<<<<<<< Updated upstream
-=======
-    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
-
-    <script>
-      function reviewPost() { //댓글 포스팅하기
-            {#let idLink = document.location.href.split('/')[4]#}
-            let text = $("#textarea-post").val()
-            let today = new Date().toISOString()
-
-            $.ajax({
-                type: "POST",
-                url: "",
-                data: {
-                    text_give: text,
-                    date_give: today
-                },
-                success: function (response) {
-                    alert(response["msg"]);
-                    window.location.reload()
-
-                }
-            })
-        }
-
-        function get_posts() { //댓글 불러오기
-            $("#post-box").empty()
-            $.ajax({
-                type: "GET",
-                url: "/api/reviews",
-                data: {},
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        let posts = response["posts"]
-                        for (let i = 0; i < posts.length; i++) {
-                            let post = posts[i]
-                            let html_temp = `
-                                                        `
-                            $("#post-box").append(html_temp)
-                        }
-                    }
-                }
-            })
-        }
-
-        $(document).ready(function () {
-            get_posts()
-        })
-    </script>
-
->>>>>>> Stashed changes
 </head>
 <body>
-    <div class="header">
-        <div class="my_info">00님 환영합니다.</div>
-        <div><button type="button">Logout</button></div>
-    </div>
-    <div class="detail">
-        <div><img src="{{ webtoon['image'] }}" alt="{{ webtoon['title'] }}"></div>
-        <div>{{ webtoon['title'] }} <span>{{ webtoon['author'] }}</span></div>
-        <div>{{ webtoon['kind'] }}</div>
-        <div>{{ webtoon['summary'] }}</div>
 
-        <div>
-            추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
-            {% if check_like == false %}
-                <button class="likes like-btn" type="button" data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
-            {% else %}
-                <button class="likes dislike-btn" type="button" data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i class="fa fa-heart" aria-hidden="true"></i></button>
-            {% endif %}
+    <div class="container">
+        <div class="main-header">
+        <p class="my-info">00님 환영합니다.</p>
+        <button onclick="sign_out()" type="button">로그아웃</button>
+    </div>
+
+<div class="wrap">
+    <div class="detail-box">
+        <div class="detail-image"><img class="image" src="{{ webtoon['image'] }}" alt="{{ webtoon['title'] }}"></div>
+        <div class="detail">
+            <div class="title-box">
+                <div class="title">{{ webtoon['title'] }}</div>
+                <div class="author">{{ webtoon['author'] }}</div>
+            </div>
+            <div class="genre">{{ webtoon['kind'] }}</div>
+            <div class="summary">{{ webtoon['summary'] }}</div>
+
+            <div class="likes-container">
+                추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
+                {% if check_like == false %}
+                    <button class="likes like-btn" type="button"
+                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
+                            class="fa fa-heart-o heart"
+                            aria-hidden="true"></i>
+                    </button>
+                {% else %}
+                    <button class="likes dislike-btn" type="button"
+                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
+                            class="fa fa-heart heart"
+                            aria-hidden="true"></i>
+                    </button>
+                {% endif %}
+            </div>
+
         </div>
-
     </div>
-    <div class="reviewForm">
-<<<<<<< Updated upstream
-        <form id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
-            <label for="textarea-post">Review</label>
-            <textarea id="textarea-post" name="review" placeholder="내용을 입력해주세요"></textarea>
-            <button type="submit">제출</button>
-=======
-
->>>>>>> Stashed changes
+    <div class="review-form">
+        <form class="form" id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
+            <div class="form-contents">
+                <label class="form-lbl" for="textarea-post">리뷰 남기기</label>
+{#                <textarea id="textarea-post" class="form-text" style="resize: none" name="review"#}
+{#                          placeholder="내용을 입력해주세요"></textarea>#}
+                <textarea id="textarea-post" class="textarea" style="resize: none" rows="3" name="review" placeholder="내용을 입력해주세요."></textarea>
+            </div>
+            <div class="btn-container">
+                <button class="form-btn" type="submit">제출</button>
+            </div>
         </form>
     </div>
-    <div id="reviewsContainer" class="reviews">
+    <div class="reviews" id="reviewsContainer" class="reviews">
         {% for review in reviews %}
             {% set userName = review['username'] %}
             {% set comment = review['text'] %}
+            <div class="review-container">
                 <div class="review-card">
-                    <span><strong>{{ userName }}</strong></span>
-                    <p>{{ comment }}</p>
-                    <button type="button">삭제</button>
+                    <span class="review-name"><strong>{{ userName }}</strong></span>
+                    <p class
+                               ="review-text">{{ comment }}</p>
+{#                    <button class="review-btn" type="button"><i class="fa fa-trash trash" aria-hidden="true"></i></button>#}
+                    <button class="delete" type="button"></button>
                 </div>
+            </div>
         {% endfor %}
     </div>
     <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
-
+</div>
 </body>
 </html>
