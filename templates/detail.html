@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-{#        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
+        <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -26,7 +26,6 @@
         <div>{{ webtoon['title'] }} <span>{{ webtoon['author'] }}</span></div>
         <div>{{ webtoon['kind'] }}</div>
         <div>{{ webtoon['summary'] }}</div>
-{#        {% set check_like = webtoons[i]['check_like'] %}#}
 
         <div>
             추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>

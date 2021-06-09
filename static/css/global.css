@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Serif KR', serif;
+}
+
+body {
+    font-family: 'Noto Serif KR', serif;
+
+}
+
+input,
+textarea,
+button {
+    border: none;
+    background-color: transparent;
+    font-family: 'Noto Serif KR', serif;
+}
+
+button {
+    cursor: pointer;
+}
