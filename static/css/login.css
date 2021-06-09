@@ -1,7 +1,7 @@
 /*login*/
 html,
 body{
-    background-color: #0068be;
+    background-color: var(--main-color);
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -31,36 +31,79 @@ body{
 
 .title,
 .subtitle {
-    color:#0068be;
+    color: var(--main-color);
+
 }
 
-/*.title-font{*/
-/*    color:white;*/
-/*}*/
+
 .box{
-    max-width:480px;
-    max-heigth:300px;
-    margin:30px auto 0px auto;
+    max-width: 480px;
+    margin: 30px auto 0px auto;
+
+
 }
 
 .id-box,
-.password-box{
+.password-box {
     margin-bottom: 3px;
-}
-input{
-    border:none;border-right:0px; border-top:0px; boder-left:0px;
+    border-bottom: solid 2px white;
+    padding-bottom: 2px;
+
+
 }
 
-.input:focus::placeholder{
-    color:transparent;
+.id-input,
+.password-input {
+    width: 450px;
+    height: 40px;
+    padding-left: 40px;
+
 }
 
+
+input::placeholder{
+    color: white;
+    font-size: var(--font-size-sm);
+}
+
+
+input:focus::placeholder{
+    color: transparent;
+}
+
+input:focus {
+    outline-color: transparent;
+}
 
 .open-login-button {
-    margin-top:15px;
+    margin-top: 15px;
+    color: white;
+    font-size: var(--font-size-sm);
 }
 
-.is_blue{
-    background-color:#0068be;
-    color:white;
+.is-blue{
+    background-color: var(--main-color);
+    color: white;
+    border-bottom-color: white;
+    box-shadow: none;
+}
+
+.is-white{
+    background-color: white;
+    color: var(--main-color);
+    border-bottom-color: var(--main-color);
+}
+
+.is-shadow{
+    box-shadow: var(--shadow);
+}
+
+.auto-complete{
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    /*-webkit-text-fill-color: var(--main-color) !important;*/
+}
+
+.off-auto-complete{
+    -webkit-box-shadow: 0 0 0 1000px var(--main-color) inset;
+    -webkit-text-fill-color: #fff !important;
 }

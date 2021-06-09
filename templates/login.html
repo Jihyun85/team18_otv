@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 
     <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css" />
+
 
 
     <!-- JS -->
@@ -21,6 +21,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
+
+        function login_blur() {
+            console.log("onblur 실행완료")
+            $("#login-box").removeClass("is-white is-shadow").addClass("is-blue")
+            $("#input-username").removeClass("is-white auto-input").addClass("is-blue off-auto-complete")
+            $("#input-password").removeClass("is-white").addClass("is-blue")
+            $("#login-btn").removeClass("is-white").addClass("is-blue")
+            $("#login-register-btn").removeClass("is-white").addClass("is-blue")
+            $(".id-box").removeClass("is-white").addClass("is-blue")
+            $(".password-box").removeClass("is-white").addClass("is-blue")
+            $(".fa-user").removeClass("is-white").addClass("is-blue")
+            $(".fa-lock").removeClass("is-white").addClass("is-blue")
+
+        }
+
+        function login_focus() {
+            console.log("onfocus 실행완료")
+            $("#login-box").removeClass("is-blue").addClass("is-white is-shadow")
+            $("#input-username").removeClass("is-blue off-auto-complete").addClass("is-white auto-complete")
+            $("#input-password").removeClass("is-blue").addClass("is-white")
+            $("#login-btn").removeClass("is-blue").addClass("is-white")
+            $("#login-register-btn").removeClass("is-blue").addClass("is-white")
+            $(".id-box").removeClass("is-blue").addClass("is-white")
+            $(".password-box").removeClass("is-blue").addClass("is-white")
+            $(".fa-user").removeClass("is-blue").addClass("is-white")
+            $(".fa-lock").removeClass("is-blue").addClass("is-white")
+
+        }
+
         function sign_in() {
             let username = $("#input-username").val()
             let password = $("#input-password").val()
@@ -72,25 +101,25 @@
     </section>
     <section class="login-section">
         <div class="login-container">
-            <div class="box">
-                <div class="id-box control has-icons-left"> <!--아이디-->
-                    <input id="input-username" class="input id-input" type="text" placeholder="아이디">
-                    <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+            <div id="login-box" class="box is-blue">
+                <div class="id-box control has-icons-left is-blue"> <!--아이디-->
+                    <input onblur="login_blur()" onfocus="login_focus()" id="input-username" class="id-input is-blue" type="text" placeholder="아이디">
+                    <span class="icon is-small is-left"><i class="fa fa-user is-blue"></i></span>
                 </div>
-                <div class="password-box control has-icons-left">
-                    <input id="input-password" class="input password-input" type="password" placeholder="비밀번호">
-                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                <div class="password-box control has-icons-left is-blue">
+                    <input onblur="login_blur()" onfocus="login_focus()" id="input-password" class="password-input is-blue" type="password" placeholder="비밀번호">
+                    <span class="icon is-small is-left"><i class="fa fa-lock is-blue"></i></span>
                 </div>
                 <div id="sign-in-or-up-box" class="has-text-centered">
                     <nav class="level is-mobile">
-                        <button class="level-item button open-login-button" onclick="sign_in()">
+                        <button id="login-btn" class="level-item open-login-button is-blue" onclick="sign_in()">
                             로그인
                         </button>
                     </nav>
                     <hr>
                     <h4>아직 회원이 아니시라면</h4>
                     <nav class="level is-mobile">
-                        <button class="level-item button open-login-button" onclick="window.location.href='/join'">회원가입</button>
+                        <button id="login-register-btn" class="level-item open-login-button is-blue" onclick="window.location.href='/join'">회원가입</button>
                     </nav>
 
                 </div>
