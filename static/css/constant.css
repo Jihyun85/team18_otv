@@ -1,0 +1,8 @@
+:root {
+    --font-size-sm: 16px;
+    --font-size-md: 20px;
+    --font-size-lg: 24px;
+    --font-size-title: 36px;
+    --main-color: #0068be;
+    --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
