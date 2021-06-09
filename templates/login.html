@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 
     <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css" />
 
 
     <!-- JS -->
@@ -63,33 +64,33 @@
 
 </head>
 <body>
-    <section class="header">
-        <div class="titile-box">
-            <h1 class="title">OTV</h1>
-            <h3 class="subtitle">웹툰, 무엇이든 추천해드립니다.</h3>
+    <section class="longin-header">
+        <div class="title-box">
+            <h1 class="title title-font">오 툰 뷰</h1>
+            <h3 class="subtitle title-font">웹툰, 무엇이든 추천해드립니다.</h3>
         </div>
     </section>
     <section class="login-section">
         <div class="login-container">
             <div class="box">
                 <div class="id-box control has-icons-left"> <!--아이디-->
-                    <input id="input-username" class="input" type="text" placeholder="아이디">
+                    <input id="input-username" class="input id-input" type="text" placeholder="아이디">
                     <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                 </div>
                 <div class="password-box control has-icons-left">
-                    <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                    <input id="input-password" class="input password-input" type="password" placeholder="비밀번호">
                     <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
                 </div>
                 <div id="sign-in-or-up-box" class="has-text-centered">
                     <nav class="level is-mobile">
-                        <button class="level-item open-login-button" onclick="sign_in()">
+                        <button class="level-item button open-login-button" onclick="sign_in()">
                             로그인
                         </button>
                     </nav>
                     <hr>
                     <h4>아직 회원이 아니시라면</h4>
                     <nav class="level is-mobile">
-                        <button class="level-item open-login-button" onclick="window.location.href='/join'">회원가입</button>
+                        <button class="level-item button open-login-button" onclick="window.location.href='/join'">회원가입</button>
                     </nav>
 
                 </div>

@@ -1,1 +1,66 @@
 /*login*/
+html,
+body{
+    background-color: #0068be;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+
+
+}
+
+.longin-header{
+    padding : 45px 100px 45px 100px;
+    background-color: white;
+    width: 100vw;
+    height: 20vh;
+    postion: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+
+
+.login-container{
+    margin: auto 0;
+
+}
+
+.title,
+.subtitle {
+    color:#0068be;
+}
+
+/*.title-font{*/
+/*    color:white;*/
+/*}*/
+.box{
+    max-width:480px;
+    max-heigth:300px;
+    margin:30px auto 0px auto;
+}
+
+.id-box,
+.password-box{
+    margin-bottom: 3px;
+}
+input{
+    border:none;border-right:0px; border-top:0px; boder-left:0px;
+}
+
+.input:focus::placeholder{
+    color:transparent;
+}
+
+
+.open-login-button {
+    margin-top:15px;
+}
+
+.is_blue{
+    background-color:#0068be;
+    color:white;
+}

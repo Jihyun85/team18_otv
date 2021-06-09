@@ -1,1 +1,80 @@
 /*join*/
+html,
+body{
+    background-color: #0068be;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+
+
+}
+
+.join-header{
+    padding : 45px 100px 45px 100px;
+    background-color: white;
+    width: 100vw;
+    height: 20vh;
+    postion: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+
+
+.join-container{
+    margin: auto 0;
+
+}
+
+.title,
+.subtitle {
+    color:#0068be;
+}
+
+
+.box{
+    max-width:480px;
+    max-heigth:300px;
+    margin:30px auto 0px auto;
+}
+
+.input:focus::placeholder{
+    color:transparent;
+}
+
+
+.input{
+    margin:0px;
+}
+
+
+.is_blue{
+    background-color:#0068be;
+    color:white;
+}
+
+
+.id-field,
+.nickname-field {
+    width: 100%;
+    display:flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.id-check-box,
+.nickname-check-box{
+    width: 74%;
+}
+
+.btn-check{
+    width: 24%;
+}
+
+p{
+    margin-bottom: 15px;
+}

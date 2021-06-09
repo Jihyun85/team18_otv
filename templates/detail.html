@@ -13,6 +13,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+<<<<<<< Updated upstream
+=======
+    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
+
+    <script>
+      function reviewPost() { //댓글 포스팅하기
+            {#let idLink = document.location.href.split('/')[4]#}
+            let text = $("#textarea-post").val()
+            let today = new Date().toISOString()
+
+            $.ajax({
+                type: "POST",
+                url: "",
+                data: {
+                    text_give: text,
+                    date_give: today
+                },
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload()
+
+                }
+            })
+        }
+
+        function get_posts() { //댓글 불러오기
+            $("#post-box").empty()
+            $.ajax({
+                type: "GET",
+                url: "/api/reviews",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        let posts = response["posts"]
+                        for (let i = 0; i < posts.length; i++) {
+                            let post = posts[i]
+                            let html_temp = `
+                                                        `
+                            $("#post-box").append(html_temp)
+                        }
+                    }
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            get_posts()
+        })
+    </script>
+
+>>>>>>> Stashed changes
 </head>
 <body>
     <div class="header">
@@ -36,10 +87,14 @@
 
     </div>
     <div class="reviewForm">
+<<<<<<< Updated upstream
         <form id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
             <label for="textarea-post">Review</label>
             <textarea id="textarea-post" name="review" placeholder="내용을 입력해주세요"></textarea>
             <button type="submit">제출</button>
+=======
+
+>>>>>>> Stashed changes
         </form>
     </div>
     <div id="reviewsContainer" class="reviews">
