@@ -16,19 +16,27 @@ SECRET_KEY = 'team18' # 변경하였습니다
 
 @app.route('/')
 def home():
-    webtoons = list(db.webtoons.find({}, {'_id': False}))
-    return render_template('index.html', webtoons=webtoons)
-
     token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])  # 페이로드에서
-        user_info = db.users.find_one({"username": payload["id"]})  # 아이디 정보 꺼내와서
-        return render_template('index.html', user_info=user_info)  # 클라이언트에 전달달
 
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        webtoons = list(db.webtoons.find({}, {'_id': False}))
+
+        # likes 순으로 정렬
+        data = sorted(webtoons, key=lambda a: (a['likes']), reverse=True)
+
+        # 해당 유저가 좋아요를 눌렀는지 여부 확인
+        check_data = []
+        for webtoon in data:
+            like_check = db.likes.find_one({'webtoon_id': str(webtoon['id']), 'username': user_info['username']}) != None
+            webtoon['check_like'] = like_check
+            check_data.append(webtoon)
+        return render_template('index.html', webtoons=check_data, user_info=user_info)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    # except jwt.exceptions.DecodeError:
-    #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/login')
 def login():
@@ -40,11 +48,23 @@ def join():
 
 @app.route('/webtoons/<id>')
 def webtoon(id):
-    my_webtoon = db.webtoons.find_one({'id': int(id)})
-    if my_webtoon is not None:
-        return render_template('detail.html', webtoon=my_webtoon)
-    else:
-        return redirect(url_for('home'))
+    token_receive = request.cookies.get('mytoken')
+
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        my_webtoon = db.webtoons.find_one({'id': int(id)})
+
+        check_like = db.likes.find_one({'webtoon_id': str(id), 'username': user_info['username']}) != None
+
+        if my_webtoon is not None:
+            return render_template('detail.html', webtoon=my_webtoon, check_like=check_like)
+        else:
+            return redirect(url_for('home'))
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
 
@@ -61,7 +81,7 @@ def like_webtoon():
 
         doc = {
             "webtoon_id": id_receive,
-            "username": user_info["name"],
+            "username": user_info["username"],
         }
 
         if action_receive == "like":
@@ -75,8 +95,8 @@ def like_webtoon():
             db.likes.delete_one(doc)
             # collection - webtoons
             new_like = target_webtoon['likes'] - 1
-            db.webtoons.update_one({'title': int(id_receive)}, {'$set': {'likes': new_like}})
-        return jsonify({"result": 'success'})
+            db.webtoons.update_one({'id': int(id_receive)}, {'$set': {'likes': new_like}})
+        return jsonify({"count": new_like})
 
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))

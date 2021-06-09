@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ webtoon.title }} | 오툰뷰</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+{#        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 </head>
+
 <body>
     <div class="header">
         <div class="my_info">00님 환영합니다.</div>
@@ -14,7 +26,17 @@
         <div>{{ webtoon['title'] }} <span>{{ webtoon['author'] }}</span></div>
         <div>{{ webtoon['kind'] }}</div>
         <div>{{ webtoon['summary'] }}</div>
-        <div>추천 : {{ webtoon['likes'] }} <span><button type="button">추천</button></span></div>
+{#        {% set check_like = webtoons[i]['check_like'] %}#}
+
+        <div>
+            추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
+            {% if check_like == false %}
+                <button class="likes like-btn" type="button" data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+            {% else %}
+                <button class="likes dislike-btn" type="button" data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i class="fa fa-heart" aria-hidden="true"></i></button>
+            {% endif %}
+        </div>
+
     </div>
     <div class="reviewForm">
         <form action="">

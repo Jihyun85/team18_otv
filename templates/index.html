@@ -10,11 +10,13 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
         <!-- Font Awesome CSS -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+{#        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
 
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+        <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 
     <script>
         function sign_out() {
@@ -22,7 +24,11 @@
             alert('로그아웃!')
             window.location.href='/login'
         }
+
+
     </script>
+
+
 </head>
 <body>
 
@@ -39,10 +45,18 @@
             {% set image = webtoons[i]['image'] %}
             {% set title = webtoons[i]['title'] %}
             {% set likes = webtoons[i]['likes'] %}
+            {% set id = webtoons[i]['id'] %}
             <div class="topCard">
                 <div><img src="{{ image }}" alt="{{ title }}"></div>
                 <p>{{ title }}</p>
-                <p>추천 : {{ likes }} <button type="button">좋아요</button></p>
+                <p>
+                    추천 : <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                    {% if check_like == false %}
+                        <button class="likes like-btn" type="button" data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                    {% else %}
+                        <button class="likes dislike-btn" type="button" data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                    {% endif %}
+                </p>
             </div>
         {% endfor %}
     </div>
@@ -51,10 +65,20 @@
             {% set image = webtoons[j]['image'] %}
             {% set title = webtoons[j]['title'] %}
             {% set likes = webtoons[j]['likes'] %}
+            {% set id = webtoons[j]['id'] %}
+            {% set check_like = webtoons[j]['check_like'] %}
+
             <div class="card">
                 <div><img src="{{ image }}" alt="{{ title }}"></div>
                 <p>{{ title }}</p>
-                <p>추천 : {{ likes }} <button type="button">좋아요</button></p>
+               <p>
+                    추천 : <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                    {% if check_like == false %}
+                        <button class="likes like-btn" type="button" data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                    {% else %}
+                        <button class="likes dislike-btn" type="button" data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                    {% endif %}
+                </p>
             </div>
         {% endfor %}
     </div>
