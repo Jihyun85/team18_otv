@@ -67,11 +67,11 @@
     </div>
     <div class="reviews" id="reviewsContainer" class="reviews">
         {% for review in reviews %}
-            {% set userName = review['username'] %}
+            {% set nickname = review['nickname'] %}
             {% set comment = review['text'] %}
             <div class="review-container">
                 <div class="review-card">
-                    <span class="review-name"><strong>{{ userName }}</strong></span>
+                    <span class="review-name"><strong>{{ nickname }}</strong></span>
                     <p class
                                ="review-text">{{ comment }}</p>
 {#                    <button class="review-btn" type="button"><i class="fa fa-trash trash" aria-hidden="true"></i></button>#}

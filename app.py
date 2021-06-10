@@ -166,7 +166,8 @@ def review_post(id):
         date_receive = request.form["date_give"]
 
         doc = {
-            "username": user_info["username"],
+            "username": user_info["username"], #리뷰에 닉네임 노출로 바꿨지만 username도 저장은 하겠읍니다
+            "nickname": user_info["nickname"],
             "text": text_receive,
             "date": date_receive,
             "webtoon_id": int(id), #삭제 기능 추가 희망
