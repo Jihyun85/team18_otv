@@ -188,9 +188,6 @@ def review_post(id):
 
         db.reviews.insert_one(doc)
 
-        return jsonify({"result": {
-            "username": user_info["username"]
-        }})
         review_id_num += 1
 
         return jsonify({"result": doc})

@@ -96,31 +96,31 @@
                 {% set check_like = webtoons[j]['check_like'] %}
 
                 <a href="/webtoons/{{ id }}" class="webtoon-all-link">
-                <li class="webtoon-all-item">
-                    <div class="webtoon-imgbox"><img src="{{ image }}" alt="{{ title }}"></div>
-                    <div class="webtoon-all-detail">
-                        <h4 class="webtoon-title">{{ title }}</h4>
-                        <div class="likes-btn-wrap">
-                            {% if check_like == false %}
-                                <button class="likes like-btn" type="button"
-                                        data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }})"><i class="fa fa-heart-o heart"
-                                                                                            aria-hidden="true"></i>
-                                </button>
-                            {% else %}
-                                <button class="likes dislike-btn" type="button"
-                                        data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }})"><i class="fa fa-heart heart"
-                                                                                            aria-hidden="true"></i>
-                                </button>
-                            {% endif %}
-                            <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                    <li class="webtoon-all-item">
+                        <div class="webtoon-imgbox"><img src="{{ image }}" alt="{{ title }}"></div>
+                        <div class="webtoon-all-detail">
+                            <h4 class="webtoon-title">{{ title }}</h4>
+                            <div class="likes-btn-wrap">
+                                {% if check_like == false %}
+                                    <button class="likes like-btn" type="button"
+                                            data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }})"><i class="fa fa-heart-o heart"
+                                                                                                aria-hidden="true"></i>
+                                    </button>
+                                {% else %}
+                                    <button class="likes dislike-btn" type="button"
+                                            data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }})"><i class="fa fa-heart heart"
+                                                                                                aria-hidden="true"></i>
+                                    </button>
+                                {% endif %}
+                                <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-
+                    </li>
+                </a>
             {% endfor %}
         </ul>
     </article>
+    <div class="footer"></div>
 </div>
-
 </body>
 </html>
