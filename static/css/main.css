@@ -221,12 +221,12 @@ body {
 
 .likes like-btn {
     width: 100%;
-    margin: 0px 10px 0px 10px;
+    margin: 0px, 10px, 0px, 10px;
 }
 
 .likes dislike-btn {
     width: 100%;
-    margin-bottom: 0px 10px 0px 10px;
+    margin-bottom: 0px, 10px, 0px, 10px;
 }
 
 .likes-main-box {
@@ -236,7 +236,7 @@ body {
 }
 
 .likes-count {
-    diplay: block
+    diplay: block;
     padding: 10px;
 }
 
