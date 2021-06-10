@@ -63,32 +63,12 @@
                     <div class="genre">{{ webtoon['kind'] }}</div>
                 </div>
                 <div class="summary">{{ webtoon['summary'] }}</div>
-
-                {#            <div class="likes-container">#}
-                {#                추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>#}
-                {#                {% if check_like == false %}#}
-                {#                    <button class="likes like-btn" type="button"#}
-                {#                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i#}
-                {#                            class="fa fa-heart-o heart"#}
-                {#                            aria-hidden="true"></i>#}
-                {#                    </button>#}
-                {#                {% else %}#}
-                {#                    <button class="likes dislike-btn" type="button"#}
-                {#                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i#}
-                {#                            class="fa fa-heart heart"#}
-                {#                            aria-hidden="true"></i>#}
-                {#                    </button>#}
-                {#                {% endif %}#}
-                {#            </div>#}
-
             </div>
         </div>
         <div class="review-form">
             <form class="form" id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
                 <div class="form-contents">
                     <label class="form-lbl" for="textarea-post">리뷰 남기기</label>
-                    {#                <textarea id="textarea-post" class="form-text" style="resize: none" name="review"#}
-                    {#                          placeholder="내용을 입력해주세요"></textarea>#}
                     <textarea id="textarea-post" class="textarea" style="resize: none" rows="3" name="review"
                               placeholder="내용을 입력해주세요."></textarea>
                 </div>
@@ -104,9 +84,7 @@
                 <div class="review-container">
                     <div class="review-card">
                         <span class="review-name"><strong>{{ nickname }}</strong></span>
-                        <p class
-                                   ="review-text">{{ comment }}</p>
-                        {#                    <button class="review-btn" type="button"><i class="fa fa-trash trash" aria-hidden="true"></i></button>#}
+                        <p class="review-text">{{ comment }}</p>
                         <button class="delete" type="button"></button>
                     </div>
                 </div>
