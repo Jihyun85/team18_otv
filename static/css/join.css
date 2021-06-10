@@ -45,7 +45,7 @@ html{
 
 .input-check-box,
 .password-box {
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     border-bottom: solid 2px white;
     padding-bottom: 2px;
 }
@@ -55,11 +55,12 @@ input:focus::placeholder{
 }
 
 input::placeholder{
-    color: white;
+
     font-size: var(--font-size-sm);
 }
 
 .join-check-input{
+
     height: 40px;
     padding-left: 40px;
 }
@@ -91,16 +92,33 @@ input::placeholder{
     padding-bottom: 20px;
     margin-top: 15px;
     color: white;
-    font-size: var(--font-size-sm);
-
+    font-weight: 600;
 }
 
-.bottom-btns{
+
+.btn-check{
+    font-size: var(--font-size-sm);
+}
+
+.btn-check:hover{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+.bottom-btn{
     margin-top: 15px;
+    font-size: 18px;
+}
+
+.bottom-btn:hover{
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .login-p {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+     line-height: 15px;
 }
 
 
@@ -115,6 +133,7 @@ input::placeholder{
     background-color: white;
     color: var(--main-color);
     border-bottom-color: var(--main-color);
+
 }
 
 .is-shadow{

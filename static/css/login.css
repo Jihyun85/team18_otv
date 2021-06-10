@@ -79,9 +79,12 @@ input:focus {
 }
 
 .open-login-button {
-    margin-top: 15px;
+    width: 10px;
+    padding-top: 18px;
     color: white;
     font-size: var(--font-size-sm);
+    font-weight: 600;
+
 }
 
 .is-blue{
@@ -110,3 +113,9 @@ input:focus {
     -webkit-box-shadow: 0 0 0 1000px var(--main-color) inset;
     -webkit-text-fill-color: #fff !important;
 }
+
+.open-login-button:hover{
+    font-size: 17px;
+    font-weight: bold;
+}
+
