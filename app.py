@@ -71,6 +71,12 @@ def webtoon(id):
             # reviews 불러오기
             reviews = list(db.reviews.find({'webtoon_id': int(id)}, {'_id': False}))
 
+            for review in reviews:
+                if user_info['username'] == review['username']:
+                    review['accessible'] = 'true'
+                else:
+                    review['accessible'] = 'false'
+
             return render_template('detail.html', webtoon=my_webtoon, check_like=check_like, reviews=reviews, user_info=user_info)
         else:
             return redirect(url_for('home'))

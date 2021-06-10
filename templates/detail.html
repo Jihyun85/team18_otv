@@ -87,7 +87,11 @@
                     <div class="review-card">
                         <span class="review-name"><strong>{{ nickname }}</strong></span>
                         <p class="review-text">{{ comment }}</p>
-                        <button onclick="deleteReview('{{ review_id }}')" class="delete" type="button"></button>
+                        {% if review['accessible'] == 'true' %}
+                            <button onclick="deleteReview('{{ review_id }}')" class="delete" type="button"></button>
+                        {% else %}
+                            <button onclick="deleteReview('{{ review_id }}')" class="delete is-hidden" type="button"></button>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
