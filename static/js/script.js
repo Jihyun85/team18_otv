@@ -27,7 +27,7 @@ function toggle_like(id) {
         })
 
     } else {
-        target_btn.innerHTML = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
+        target_btn.innerHTML = '<i class="fa fa-heart-o heart" aria-hidden="true"></i>';
         target_btn.classList.add('like-btn');
         target_btn.classList.remove('dislike-btn');
         $.ajax({

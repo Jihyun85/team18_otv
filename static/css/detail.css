@@ -24,16 +24,17 @@
     display: flex;
 }
 .detail-side {
-    width: 40%;
+    width: 400px;
     height: 320px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 .detail-image {
-    width: 100%;
+    width: 320px;
     height: 280px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: flex-end;
 }
 .likes-container {
@@ -49,7 +50,7 @@
 
 }
 .detail {
-    width: 60%;
+    width: 600px;
     /*height: 320px;*/
 }
 
@@ -57,12 +58,12 @@
 @media (max-width: 1020px) {
     .wrap {width: 100%;}
 }
+/*@media (max-width: 768px) {*/
+/*    .wrap {width: 100%;}*/
+/*}*/
 @media (max-width: 768px) {
     .wrap {width: 100%;}
-}
-@media (max-width: 480px) {
-    .wrap {width: 100%;}
-    .detail-box {display: none;}
+    .detail-box {flex-direction: column;}
     .detail-image {width: 100%;}
     .detail {width: 100%;}
 }
@@ -114,22 +115,25 @@
     var(--font-size-md);
     padding: 50px;
     padding-top: 30px;
+    padding-right: 20px;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 26px;
 }
 
 .heart {
     color: red;
+    font-size: 20px;
 }
 
 /*----------------------*/
 .form {
-    width: 82%;
+    width: 90%;
     height: 80%;
     display: flex;
     gap: 15px;
     justify-content: center;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 7px 14px, rgba(0, 0, 0, 0.22) 0px 5px 5px;
 }
 .review-container {
     width: 100%;
@@ -137,20 +141,27 @@
     display: flex;
     align-items: center;
 }
+.review-container:first-child {
+    border-top: 0.5px solid gray;
+}
+.review-container:last-child {
+    border-bottom: 0.5px solid gray;
+}
 .review-card {
-    width: 80%;
+    width: 90%;
     height: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.10) 0px 3px 3px;
 }
 .review-card:hover {
-    height: 95%;
+    /*height: 95%;*/
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 .form,
 .review-card {
     background: #fff;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     margin: auto;
 }
 
@@ -177,7 +188,7 @@
 .form-btn {
     width: 100px;
     height: 74px;
-    background-color: #006bea;
+    background-color: #1e6bcb;
     border-radius: 10px;
     color: #fff;
     margin: 36px 0px 10px;
@@ -198,4 +209,14 @@
 .delete {
     background-color: #90caf9;
     margin: 0px 30px 0px 30px;
+}
+.footer {
+    background: #fff;
+}
+.home {
+    font-size: 30px;
+    color: #003770;
+}
+.button {
+    height: 32px;
 }
