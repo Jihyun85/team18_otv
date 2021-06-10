@@ -10,14 +10,11 @@ body {
 }
 
 .main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    height: 50px;
+    margin: 0px 0px 10px 0px;
     background-color: white;
 }
 
@@ -26,12 +23,29 @@ body {
     align-items: center;
 }
 
+.logout-btn{
+    background-color: #0068be;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    transition: background-color .5s;
+    margin-left: 20px
+}
+
+.logout-btn:hover{
+    background-color: crimson;
+}
+
+
 
 .title-box {
     display: flex;
     flex-direction: column;
     align-content: center;
-    gap: 15px;
+    gap: 20px;
+    background: linear-gradient(to bottom, #0068be, #00b8be);
+    color: white;
+    padding: 50px;
 
 }
 
@@ -54,11 +68,29 @@ body {
     font-weight: 600;
 }
 
+.subtitle-line {
+    border: 2px;
+    color: darkgray;
+
+}
+
 .webtoon-best,
-.webtoon-all
-{
+.webtoon-all {
     padding-top: 50px;
 }
+.best-word {
+    transition: color .5s;
+}
+
+.best-word:hover {
+    color: #0068be;
+
+}
+
+
+/*.toprank-link{*/
+
+/*}*/
 
 .toprank-item,
 .webtoon-all-item {
@@ -85,17 +117,35 @@ body {
 
 .toprank-detail {
     height: 100px;
+    display: flex;
+}
+
+.ico-best {
+    background-color: #0068be;
+    color: white;
+    font-size: 15pt;
+    padding: 5px;
+    position: absolute;
+}
+
+.toprank-title {
+    width: 80%;
+}
+
+.toprank-btn-wrap {
+    width: 20%;
 }
 
 .webtoon-all-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+    gap: 20px;
+
 }
 
 .webtoon-all-item {
     width: 200px;
+    justify-content: center;
 }
 
 .webtoon-imgbox {
@@ -106,3 +156,32 @@ body {
     width: 100%;
 }
 
+.webtoon-all-detail {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.webtoon-title {
+    width: 150px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.likes-btn-wrap {
+    width: 50px;
+}
+
+.likes like-btn {
+    width: 100%;
+}
+
+.likes dislike-btn {
+    width: 100%;
+}
+
+.likes-count {
+    width: 100%;
+}

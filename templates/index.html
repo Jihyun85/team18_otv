@@ -10,16 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&display=swap" rel="stylesheet">
 
     <!-- Bulma CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <!-- Font Awesome CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-        <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 
     <script>
         function sign_out() {
@@ -33,21 +33,22 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="main-header">
+<div class="container">
+    <div class="main-header">
         <p class="my-info">00님 환영합니다.</p>
-        <button onclick="sign_out()" type="button">로그아웃</button>
+        <button onclick="sign_out()" type="button" class='logout-btn'>로그아웃</button>
     </div>
 
-        <div class="title-box">
+    <div class="title-box">
         <h1 class="title-text">
-            오튠뷰
+            오툰뷰
         </h1>
         <span class="title-description">오늘의 웹툰 리뷰</span>
     </div>
 
-        <article class="webtoon-best">
-        <h2 class="subtitle">오늘의 웹툰 베스트 TOP 3!</h2>
+    <article class="webtoon-best">
+        <h2 class="subtitle">오늘의 웹툰 <span class="best-word">베스트</span> TOP 3!</h2>
+        <hr class="subtitle-line">
         <ul class="toprank-list">
             {% for i in range(3) %}
                 {% set image = webtoons[i]['image'] %}
@@ -58,14 +59,21 @@
 
                 <a href="/webtoons/{{ id }}" class="toprank-link">
                     <li class="toprank-item">
-                        <div class="webtoon-imgbox"><img src="{{ image }}" alt="{{ title }}"></div>
+                        <div class="webtoon-imgbox">
+                            <div class="ico-best">best</div>
+                            <img src="{{ image }}" alt="{{ title }}">
+                        </div>
                         <div class="toprank-detail">
-                            <h4>{{ title }}</h4>
-                            <div>
+                            <h4 class="toprank-title">{{ title }}</h4>
+                            <div class="toprank-btn-wrap">
                                 {% if check_like == false %}
-                                    <button class="likes like-btn" type="button" data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                    <button class="likes like-btn" type="button"
+                                            data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i></button>
                                 {% else %}
-                                    <button class="likes dislike-btn" type="button" data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                                    <button class="likes dislike-btn" type="button"
+                                            data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});">
+                                    <i class="fa fa-heart" aria-hidden="true"></i></button>
                                 {% endif %}
                                 <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
                             </div>
@@ -76,8 +84,9 @@
         </ul>
     </article>
 
-        <article class="webtoon-all">
+    <article class="webtoon-all">
         <h2 class="subtitle">모든 웹툰</h2>
+        <hr class="subtitle-line">
         <ul class="webtoon-all-list">
             {% for j in range(3,webtoons|length) %}
                 {% set image = webtoons[j]['image'] %}
@@ -86,24 +95,32 @@
                 {% set id = webtoons[j]['id'] %}
                 {% set check_like = webtoons[j]['check_like'] %}
 
+                <a href="/webtoons/{{ id }}" class="webtoon-all-link">
                 <li class="webtoon-all-item">
                     <div class="webtoon-imgbox"><img src="{{ image }}" alt="{{ title }}"></div>
                     <div class="webtoon-all-detail">
-                        <h4>{{ title }}</h4>
-                        <div>
+                        <h4 class="webtoon-title">{{ title }}</h4>
+                        <div class="likes-btn-wrap">
                             {% if check_like == false %}
-                                <button class="likes like-btn" type="button" data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                <button class="likes like-btn" type="button"
+                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart-o"
+                                                                                            aria-hidden="true"></i>
+                                </button>
                             {% else %}
-                                <button class="likes dislike-btn" type="button" data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                                <button class="likes dislike-btn" type="button"
+                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart"
+                                                                                            aria-hidden="true"></i>
+                                </button>
                             {% endif %}
                             <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
-                         </div>
+                        </div>
                     </div>
                 </li>
+
             {% endfor %}
         </ul>
     </article>
-    </div>
+</div>
 
 </body>
 </html>
