@@ -85,7 +85,7 @@
                                             data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});">
                                     <i class="fa fa-heart heart" aria-hidden="true"></i></button>
                                 {% endif %}
-                                <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                                <div class="likes-main-box"><div>×</div><span class="likes-count" data-num={{ id }}>{{ likes }}</span></div>
                             </div>
                         </div>
                     </li>
@@ -121,7 +121,7 @@
                                         data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }})"><i class="fa fa-heart heart" aria-hidden="true"></i>
                                 </button>
                             {% endif %}
-                            <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
+                            <div class="likes-main-box"><div>×</div><span class="likes-count" data-num={{ id }}>{{ likes }}</span></div>
                         </div>
                     </div>
                 </li>

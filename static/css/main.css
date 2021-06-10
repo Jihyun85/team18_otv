@@ -173,6 +173,7 @@ body {
 .toprank-btn-wrap {
     width: 30%;
     display: flex;
+    align-items: center;
 }
 
 .webtoon-all-list {
@@ -202,7 +203,7 @@ body {
 }
 
 .webtoon-title {
-    width: 140px;
+    width: 120px;
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -213,6 +214,9 @@ body {
 
 .likes-btn-wrap {
     width: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .likes like-btn {
@@ -223,6 +227,12 @@ body {
 .likes dislike-btn {
     width: 100%;
     margin-bottom: 0px 10px 0px 10px;
+}
+
+.likes-main-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .likes-count {
