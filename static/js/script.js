@@ -1,5 +1,4 @@
 const reviewForm = document.getElementById('reviewForm');
-const reviewDeleteBtn = document.querySelectorAll('.review-delete-btn');
 
 window.onpageshow = function(event) {
     if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
@@ -63,19 +62,19 @@ function saveReview(e) {
             'date_give': date,
         },
         success: function(res) {
-            location.reload()
-            // const reviewsContainer = document.getElementById('reviewsContainer');
-            // const reviewCards = document.querySelectorAll('.review-card');
-            // const {username, _id: objectNum} = res.result;
-            // const div = document.createElement('div');
-            // div.setAttribute('data-dbnum', objectNum)
-            // let html_temp = `
-            //             <strong>${username}</strong>
-            //             <p>${review}</p>
-            //             <button class="review-delete-btn" type="button">삭제</button>`;
-            // div.innerHTML = html_temp;
-            // reviewsContainer.appendChild(div);
-            // 리뷰 제출했을 때 새로고침되지 않고 리뷰가 이상하게 붙던 부분 수정 후 새로고침 추가!
+            // location.reload();
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            const reviewCards = document.querySelectorAll('.review-card');
+            const {nickname, _id: objectNum} = res.result;
+            const div = document.createElement('div');
+            div.classList.add("review-container");
+            let html_temp = `
+                        <div class="review-card">
+                            <span class="review-name"><strong>${nickname}</strong></span>
+                            <p class="review-text">${review}</p>
+                            <button class="delete" type="button"></button>
+                        </div>`;
+            div.innerHTML = html_temp;
 
             // 시간 역순으로 보이게 만들기 위해 구현한 코드(서버 측에서 정렬이 되지 않아 주석처리)
             // if (reviewCards.length > 0) {
@@ -84,7 +83,9 @@ function saveReview(e) {
             // } else {
             //     reviewsContainer.appendChild(div);
             // }
+            reviewsContainer.appendChild(div);
         }
+
     })
 }
 
