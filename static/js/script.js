@@ -51,6 +51,12 @@ function saveReview(e) {
     const webtoon_id = pathnameAry[pathnameAry.length -1];
     const textarea = document.getElementById("textarea-post");
     const review = textarea.value;
+
+    if(!review || review.trim() == false) {
+        alert('리뷰를 한 글자 이상 입력해주세요.');
+        return;
+    }
+
     textarea.value = "";
     const date = new Date();
 
@@ -63,16 +69,16 @@ function saveReview(e) {
         },
         success: function(res) {
             const reviewsContainer = document.getElementById('reviewsContainer');
-            const reviewCards = document.querySelectorAll('.review-card');
-            const {nickname, _id: objectNum} = res.result;
-            console.log(nickname)
+            const {nickname, review_id} = res.result;
+            console.log(typeof(review_id))
             const div = document.createElement('div');
             div.classList.add("review-container");
+            div.setAttribute("id", review_id)
             let html_temp = `
                         <div class="review-card">
                             <span class="review-name"><strong>${nickname}</strong></span>
                             <p class="review-text">${review}</p>
-                            <button class="delete" type="button"></button>
+                            <button onclick=deleteReview("${review_id}") class="delete" type="button"></button>
                         </div>`;
             div.innerHTML = html_temp;
 
@@ -97,6 +103,7 @@ function deleteReview(review_id) {
         success: function(res) {
             const reviewsContainer = document.getElementById('reviewsContainer');
             const target_review = document.getElementById(review_id);
+            console.log(target_review);
             reviewsContainer.removeChild(target_review);
         }
     })
