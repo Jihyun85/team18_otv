@@ -86,7 +86,7 @@
                     <div class="review-card">
                         <span class="review-name"><strong>{{ nickname }}</strong></span>
                         <p class="review-text">{{ comment }}</p>
-                        <button class="delete" type="button"></button>
+                        <button onclick="deleteReview('{{ review_id }}')" class="delete" type="button"></button>
                     </div>
                 </div>
             {% endfor %}
