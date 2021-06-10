@@ -142,11 +142,11 @@
     align-items: center;
 }
 .review-container:first-child {
-    border-top: 0.5px solid gray;
+    border-top: 0.5px solid #d3d3d3;
 }
-.review-container:last-child {
-    border-bottom: 0.5px solid gray;
-}
+/*.review-container:last-child {*/
+/*    border-bottom: 0.5px solid gray;*/
+/*}*/
 .review-card {
     width: 90%;
     height: 90%;
