@@ -66,6 +66,7 @@ function saveReview(e) {
             const reviewsContainer = document.getElementById('reviewsContainer');
             const reviewCards = document.querySelectorAll('.review-card');
             const {nickname, _id: objectNum} = res.result;
+            console.log(nickname)
             const div = document.createElement('div');
             div.classList.add("review-container");
             let html_temp = `
@@ -98,9 +99,9 @@ function init() {
     if (reviewForm) {
         reviewForm.addEventListener("submit", (e) => saveReview(e));
     }
-    if (reviewDeleteBtn.length > 0) {
-        reviewDeleteBtn.forEach((btn) => btn.addEventListener("click", (id) => deleteReview(id)))
-    }
+    // if (reviewDeleteBtn.length > 0) {
+    //     reviewDeleteBtn.forEach((btn) => btn.addEventListener("click", (id) => deleteReview(id)))
+    // }
 }
 
 init();

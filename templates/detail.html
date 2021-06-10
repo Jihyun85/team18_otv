@@ -24,71 +24,95 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="main-header">
+<div class="container">
+    <div class="main-header">
         <p class="my-info">{{ user_info['nickname'] }}님 환영합니다.</p>
         <button onclick="sign_out()" type="button" class="logout-btn">로그아웃</button>
     </div>
 
-<div class="wrap">
-    <div class="detail-box">
-        <div class="detail-image"><img class="image" src="{{ webtoon['image'] }}" alt="{{ webtoon['title'] }}"></div>
-        <div class="detail">
-            <div class="title-box">
-                <div class="title">{{ webtoon['title'] }}</div>
-                <div class="author">{{ webtoon['author'] }}</div>
-            </div>
-            <div class="genre">{{ webtoon['kind'] }}</div>
-            <div class="summary">{{ webtoon['summary'] }}</div>
-
-            <div class="likes-container">
-                추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
-                {% if check_like == false %}
-                    <button class="likes like-btn" type="button"
-                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
-                            class="fa fa-heart-o heart"
-                            aria-hidden="true"></i>
-                    </button>
-                {% else %}
-                    <button class="likes dislike-btn" type="button"
-                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
-                            class="fa fa-heart heart"
-                            aria-hidden="true"></i>
-                    </button>
-                {% endif %}
-            </div>
-
-        </div>
-    </div>
-    <div class="review-form">
-        <form class="form" id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
-            <div class="form-contents">
-                <label class="form-lbl" for="textarea-post">리뷰 남기기</label>
-{#                <textarea id="textarea-post" class="form-text" style="resize: none" name="review"#}
-{#                          placeholder="내용을 입력해주세요"></textarea>#}
-                <textarea id="textarea-post" class="textarea" style="resize: none" rows="3" name="review" placeholder="내용을 입력해주세요."></textarea>
-            </div>
-            <div class="btn-container">
-                <button class="form-btn" type="submit">제출</button>
-            </div>
-        </form>
-    </div>
-    <div class="reviews" id="reviewsContainer" class="reviews">
-        {% for review in reviews %}
-            {% set nickname = review['nickname'] %}
-            {% set comment = review['text'] %}
-            <div class="review-container">
-                <div class="review-card">
-                    <span class="review-name"><strong>{{ nickname }}</strong></span>
-                    <p class
-                               ="review-text">{{ comment }}</p>
-{#                    <button class="review-btn" type="button"><i class="fa fa-trash trash" aria-hidden="true"></i></button>#}
-                    <button class="delete" type="button"></button>
+    <div class="wrap">
+        <div class="detail-box">
+            <div class="detail-side">
+                <div class="detail-image"><img class="image" src="{{ webtoon['image'] }}" alt="{{ webtoon['title'] }}">
+                </div>
+                <div class="likes-container">
+                    <div class="likes-box">
+                        추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
+                        {% if check_like == false %}
+                            <button class="likes like-btn" type="button"
+                                    data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
+                                    class="fa fa-heart-o heart"
+                                    aria-hidden="true"></i>
+                            </button>
+                        {% else %}
+                            <button class="likes dislike-btn" type="button"
+                                    data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
+                                    class="fa fa-heart heart"
+                                    aria-hidden="true"></i>
+                            </button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+            <div class="detail">
+                <div class="title-box">
+                    <div class="title-detail">{{ webtoon['title'] }}</div>
+                </div>
+                <div class="sub-container">
+                    <div class="author">{{ webtoon['author'] }}</div>
+                    <div class="genre">{{ webtoon['kind'] }}</div>
+                </div>
+                <div class="summary">{{ webtoon['summary'] }}</div>
+
+                {#            <div class="likes-container">#}
+                {#                추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>#}
+                {#                {% if check_like == false %}#}
+                {#                    <button class="likes like-btn" type="button"#}
+                {#                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i#}
+                {#                            class="fa fa-heart-o heart"#}
+                {#                            aria-hidden="true"></i>#}
+                {#                    </button>#}
+                {#                {% else %}#}
+                {#                    <button class="likes dislike-btn" type="button"#}
+                {#                            data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i#}
+                {#                            class="fa fa-heart heart"#}
+                {#                            aria-hidden="true"></i>#}
+                {#                    </button>#}
+                {#                {% endif %}#}
+                {#            </div>#}
+
+            </div>
+        </div>
+        <div class="review-form">
+            <form class="form" id="reviewForm" action="/api/reviews/{{ webtoon['id'] }}" method="post">
+                <div class="form-contents">
+                    <label class="form-lbl" for="textarea-post">리뷰 남기기</label>
+                    {#                <textarea id="textarea-post" class="form-text" style="resize: none" name="review"#}
+                    {#                          placeholder="내용을 입력해주세요"></textarea>#}
+                    <textarea id="textarea-post" class="textarea" style="resize: none" rows="3" name="review"
+                              placeholder="내용을 입력해주세요."></textarea>
+                </div>
+                <div class="btn-container">
+                    <button class="form-btn" type="submit">제출</button>
+                </div>
+            </form>
+        </div>
+        <div class="reviews" id="reviewsContainer" class="reviews">
+            {% for review in reviews %}
+                {% set nickname = review['nickname'] %}
+                {% set comment = review['text'] %}
+                <div class="review-container">
+                    <div class="review-card">
+                        <span class="review-name"><strong>{{ nickname }}</strong></span>
+                        <p class
+                                   ="review-text">{{ comment }}</p>
+                        {#                    <button class="review-btn" type="button"><i class="fa fa-trash trash" aria-hidden="true"></i></button>#}
+                        <button class="delete" type="button"></button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
     </div>
-    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
-</div>
 </body>
 </html>

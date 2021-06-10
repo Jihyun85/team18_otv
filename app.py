@@ -86,7 +86,7 @@ def like_webtoon():
     token_receive = request.cookies.get('mytoken') # 설정한 쿠키명에 따라 달라질 수 있습니다.
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.users.find_one({"username": payload["id"]})
+        user_info =  db.users.find_one({"username": payload["id"]})
 
         id_receive = request.form['id_give']
         target_webtoon = db.webtoons.find_one({'id': int(id_receive)}, {'_id': False})
