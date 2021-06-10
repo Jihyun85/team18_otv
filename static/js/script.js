@@ -12,7 +12,7 @@ function toggle_like(id) {
     const likes_array = Array.prototype.slice.call(likes);
     const target_btn = likes_array.find((btn) => Number(btn.dataset.id) === Number(id));
     if (target_btn.classList.contains('like-btn')) {
-        target_btn.innerHTML = '<i class="fa fa-heart" aria-hidden="true"></i>';
+        target_btn.innerHTML = '<i class="fa fa-heart heart" aria-hidden="true"></i>';
         target_btn.classList.remove('like-btn');
         target_btn.classList.add('dislike-btn');
         $.ajax({

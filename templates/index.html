@@ -69,11 +69,11 @@
                                 {% if check_like == false %}
                                     <button class="likes like-btn" type="button"
                                             data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                    <i class="fa fa-heart-o heart" aria-hidden="true"></i></button>
                                 {% else %}
                                     <button class="likes dislike-btn" type="button"
                                             data-id={{ id }} onclick="event.preventDefault(); toggle_like({{ id }});">
-                                    <i class="fa fa-heart" aria-hidden="true"></i></button>
+                                    <i class="fa fa-heart heart" aria-hidden="true"></i></button>
                                 {% endif %}
                                 <span class="likes-count" data-num={{ id }}>{{ likes }}</span>
                             </div>
@@ -103,12 +103,12 @@
                         <div class="likes-btn-wrap">
                             {% if check_like == false %}
                                 <button class="likes like-btn" type="button"
-                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart-o"
+                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart-o heart"
                                                                                             aria-hidden="true"></i>
                                 </button>
                             {% else %}
                                 <button class="likes dislike-btn" type="button"
-                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart"
+                                        data-id={{ id }} onclick="toggle_like({{ id }})"><i class="fa fa-heart heart"
                                                                                             aria-hidden="true"></i>
                                 </button>
                             {% endif %}
