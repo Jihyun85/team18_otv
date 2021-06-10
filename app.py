@@ -61,7 +61,7 @@ def webtoon(id):
             # reviews 불러오기
             reviews = list(db.reviews.find({'webtoon_id': int(id)}, {'_id': False}))
 
-            return render_template('detail.html', webtoon=my_webtoon, check_like=check_like, reviews=reviews)
+            return render_template('detail.html', webtoon=my_webtoon, check_like=check_like, reviews=reviews, user_info=user_info)
         else:
             return redirect(url_for('home'))
     except jwt.ExpiredSignatureError:
