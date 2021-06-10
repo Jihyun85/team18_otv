@@ -139,7 +139,7 @@ function sign_in() {
             if (response['result'] == 'success') {
                 $.cookie('mytoken', response['token'], {path: '/'}); //cookie 브라우저 데이터베이스(키-밸류형태로 저장) mytoken이라는 '키'가 실제 서버가 발행한 jwt토큰(response[token])을 저장하고 있다고 하고
                 alert('로그인 성공!')
-                window.location.replace("/")
+                window.location.replace("/main")
             } else {
                 alert(response['msg'])
             }
