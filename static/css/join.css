@@ -1,18 +1,26 @@
 /*join*/
-html,
-body{
-    background-color: #0068be;
+html{
+    margin: 0px;
+    padding: 0px;
+}
+.login-wrap{
+    background-color: var(--main-color);
     height: 100vh;
     width: 100vw;
     position: relative;
     margin: 0px;
     padding: 0px;
 
-
 }
 
+.login-title,
+.login-subtitle{
+    color: var(--main-color);
+}
+
+
 .join-header{
-    padding : 45px 100px 45px 100px;
+    padding: 45px 100px 45px 100px;
     background-color: white;
     width: 100vw;
     height: 20vh;
@@ -29,39 +37,43 @@ body{
 
 }
 
-.title,
-.subtitle {
-    color:#0068be;
-}
-
 
 .box{
     max-width:480px;
-    max-heigth:300px;
     margin:30px auto 0px auto;
 }
 
-.input:focus::placeholder{
+.input-check-box,
+.password-box {
+    margin-bottom: 3px;
+    border-bottom: solid 2px white;
+    padding-bottom: 2px;
+}
+
+input:focus::placeholder{
     color:transparent;
 }
 
-
-.input{
-    margin:0px;
+input::placeholder{
+    color: white;
+    font-size: var(--font-size-sm);
 }
 
-
-.is_blue{
-    background-color:#0068be;
-    color:white;
+.join-check-input{
+    height: 40px;
+    padding-left: 40px;
 }
 
+.join-password-input {
+    width: 450px;
+    height: 40px;
+    padding-left: 40px;
+}
 
 .id-field,
 .nickname-field {
     width: 100%;
     display:flex;
-
     justify-content: space-between;
     align-items: center;
 }
@@ -75,6 +87,46 @@ body{
     width: 24%;
 }
 
-p{
+.join-btn {
+    padding-bottom: 20px;
+    margin-top: 15px;
+    color: white;
+    font-size: var(--font-size-sm);
+
+}
+
+.bottom-btns{
+    margin-top: 15px;
+}
+
+.login-p {
     margin-bottom: 15px;
+}
+
+
+.is-blue{
+    background-color: var(--main-color);
+    color: white;
+    border-bottom-color: white;
+    box-shadow: none;
+}
+
+.is-white{
+    background-color: white;
+    color: var(--main-color);
+    border-bottom-color: var(--main-color);
+}
+
+.is-shadow{
+    box-shadow: var(--shadow);
+}
+
+.auto-complete{
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    /*-webkit-text-fill-color: var(--main-color) !important;*/
+}
+
+.off-auto-complete{
+    -webkit-box-shadow: 0 0 0 1000px var(--main-color) inset;
+    -webkit-text-fill-color: #fff !important;
 }

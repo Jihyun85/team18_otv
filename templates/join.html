@@ -22,6 +22,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
+
+
+        function login_blur() {
+            console.log("onblur 실행완료")
+            $("#login-box").removeClass("is-white is-shadow").addClass("is-blue")
+            $("#input-username").removeClass("is-white auto-input").addClass("is-blue off-auto-complete")
+            $("#input-nickname").removeClass("is-white").addClass("is-blue")
+            $("#input-password").removeClass("is-white").addClass("is-blue")
+            $("#input-password2").removeClass("is-white").addClass("is-blue")
+            $("#login-btn").removeClass("is-white").addClass("is-blue")
+            $(".join-btn").removeClass("is-white").addClass("is-blue")
+            $("#login-register-btn").removeClass("is-white").addClass("is-blue")
+            $(".id-box").removeClass("is-white").addClass("is-blue")
+            $(".id-check-box").removeClass("is-white").addClass("is-blue")
+            $(".nickname-check-box").removeClass("is-white").addClass("is-blue")
+            $(".password-box").removeClass("is-white").addClass("is-blue")
+            $(".fa-user").removeClass("is-white").addClass("is-blue")
+            $(".fa-lock").removeClass("is-white").addClass("is-blue")
+            $(".fa-star").removeClass("is-white").addClass("is-blue")
+        }
+
+        function login_focus() {
+            console.log("onfocus 실행완료")
+            $("#login-box").removeClass("is-blue").addClass("is-white is-shadow")
+            $("#input-username").removeClass("is-blue off-auto-complete").addClass("is-white auto-complete")
+            $("#input-nickname").removeClass("is-blue").addClass("is-white")
+            $("#input-password").removeClass("is-blue").addClass("is-white")
+            $("#input-password2").removeClass("is-blue").addClass("is-white")
+            $("#login-btn").removeClass("is-blue").addClass("is-white")
+            $(".join-btn").removeClass("is-blue").addClass("is-white")
+            $("#login-register-btn").removeClass("is-blue").addClass("is-white")
+            $(".id-box").removeClass("is-blue").addClass("is-white")
+            $(".id-check-box").removeClass("is-blue").addClass("is-white")
+            $(".nickname-check-box").removeClass("is-blue").addClass("is-white")
+            $(".password-box").removeClass("is-blue").addClass("is-white")
+            $(".fa-user").removeClass("is-blue").addClass("is-white")
+            $(".fa-lock").removeClass("is-blue").addClass("is-white")
+            $(".fa-star").removeClass("is-blue").addClass("is-white")
+        }
+
+
+
         function is_id(asValue) {
             var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
             //아이디 조건: a-zA-Z(영문필수(소괄호가 필수)) / [대괄호]일반적인거 a-zA-Z 0-9 _. 들이 들어갈 수있고 / {중괄호}2~10개의 문자
@@ -179,45 +221,40 @@
 
 </head>
 <body>
+<div class="login-wrap">
     <section class="join-header">
         <div class="title-box">
-            <h1 class="title">오 툰 뷰</h1>
-            <h3 class="subtitle">웹툰, 무엇이든 추천해드립니다.</h3>
+            <h1 class="title login-title">오 툰 뷰</h1>
+            <h3 class="subtitle login-subtitle">웹툰, 무엇이든 추천해드립니다.</h3>
         </div>
     </section>
     <section class="join-section">
         <div class="join-container">
-            <div class="box">
+            <div id="login-box" class="box is-blue">
                 <div class="id-field">   <!-- 아이디, 중복확인-->
-                    <div class="id-check-box control has-icons-left"> <!--아이디-->
-                        <input id="input-username" class="input" type="text" placeholder="아이디">
-                        <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                    <div class="input-check-box id-check-box control has-icons-left"> <!--아이디-->
+                        <input onblur="login_blur()" onfocus="login_focus()" id="input-username" class="join-check-input is-blue" type="text" placeholder="아이디">
+                        <span class="icon is-small is-left"><i class="fa fa-user is-blue"></i></span>
                     </div>
-                     <button class="button btn-check" onclick="check_dup_id()">중복확인</button>
-                   <!-- <div id="btn-check-dup" class="control">
-                        <button class="button" onclick="check_dup_id()">중복확인</button>
-                    </div>-->
+                     <button class="join-btn btn-check is-blue" onclick="check_dup_id()">중복확인</button>
                 </div>
-                <div>
-                    <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
-                    <p id="help-id-login" class="help is-danger"></p>
-                </div>
+                <p id="help-id" class="help login-p">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
+
+
+
 
 
                 <div class="nickname-field">   <!-- 닉네임, 중복확인, 아이디 조건-->
-                    <div class="nickname-check-box control has-icons-left">
-                        <input id="input-nickname" class="input" type="text" placeholder="닉네임">
-                        <span class="icon is-small is-left"><i class="fa fa-star"></i></span>
+                    <div class="input-check-box nickname-check-box control has-icons-left">
+                        <input onblur="login_blur()" onfocus="login_focus()" id="input-nickname" class="join-check-input is-blue" type="text" placeholder="닉네임">
+                        <span class="icon is-small is-left"><i class="fa fa-star is-blue"></i></span>
                     </div>
-                    <button class="button btn-check" onclick="check_dup_nickname()">중복확인</button>
-                    <!--<div id="btn-check-dup-nickname" class="control">
-                        <button class="button" onclick="check_dup_nickname()">중복확인</button>
-                    </div>-->
+                    <button class="join-btn btn-check is-blue" onclick="check_dup_nickname()">중복확인</button>
                 </div>
-                <div>
-                    <p id="help-nickname" class="help">닉네임은 2-10자의 한글, 영문, 숫자만 입력 가능합니다.</p>
-                    <p id="help-nickname-login" class="help is-danger"></p>
-                </div>
+                <p id="help-nickname" class="help login-p">닉네임은 2-10자의 한글, 영문, 숫자만 입력 가능합니다.</p>
+
+
+
 
 
 
@@ -225,34 +262,34 @@
                 <!-- 비밀번호 -->
                 <div class="field">
                     <div class="password-box control has-icons-left"> <!--비밀번호-->
-                        <input id="input-password" class="input" type="password" placeholder="비밀번호">
-                        <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                        <input onblur="login_blur()" onfocus="login_focus()" id="input-password" class="join-password-input is-blue" type="password" placeholder="비밀번호">
+                        <span class="icon is-small is-left"><i class="fa fa-lock is-blue"></i></span>
                     </div>
-                    <p id="help-password" class="help">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
                 </div>
+                <p id="help-password" class="help login-p">영문과 숫자 조합의 8-20자의 비밀번호를 설정해주세요. 특수문자(!@#$%^&*)도 사용 가능합니다.</p>
                 <!--비밀번호 재입력-->
                 <div class="field">
-                    <div class="control has-icons-left" style="width:100%">
-                        <input id="input-password2" class="input" type="password"
+                    <div class="password-box control has-icons-left">
+                        <input onblur="login_blur()" onfocus="login_focus()" id="input-password2" class="join-password-input is-blue" type="password"
                                placeholder="비밀번호 재입력">
-                        <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                        <span class="icon is-small is-left"><i class="fa fa-lock is-blue"></i></span>
                     </div>
-                    <p id="help-password2" class="help">비밀번호를 다시 한 번 입력해주세요.</p>
-                    <nav class="level is-mobile">
-                        <button class="level-item button" onclick="sign_up()">
-                            회원가입
-                        </button>
-                        <button class="level-item button is-outlined" onclick="window.location.href='/login'">
-                            취소
-                        </button>
-                    </nav>
-
                 </div>
-
+                <p id="help-password2" class="help login-p">비밀번호를 다시 한 번 입력해주세요.</p>
+                <nav class="level is-mobile bottom-btns">
+                    <button class="level-item join-btn is-blue" onclick="sign_up()">
+                        회원가입
+                    </button>
+                    <button class="level-item join-btn is-outlined is-blue" onclick="window.location.href='/login'">
+                        취소
+                    </button>
+                </nav>
 
             </div>
         </div>
 
     </section>
+</div>
+
 </body>
 </html>
