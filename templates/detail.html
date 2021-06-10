@@ -13,13 +13,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+    <script>
+        function sign_out() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = '/login'
+        }
+    </script>
+
 </head>
 <body>
 
     <div class="container">
         <div class="main-header">
         <p class="my-info">{{ user_info['nickname'] }}님 환영합니다.</p>
-        <button onclick="sign_out()" type="button">로그아웃</button>
+        <button onclick="sign_out()" type="button" class="logout-btn">로그아웃</button>
     </div>
 
 <div class="wrap">

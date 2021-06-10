@@ -38,7 +38,7 @@ body {
 
 
 
-.title-box {
+.title-box-main {
     display: flex;
     flex-direction: column;
     align-content: center;
