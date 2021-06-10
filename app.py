@@ -5,6 +5,7 @@ import jwt
 import datetime
 import hashlib
 
+import re
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
@@ -13,6 +14,15 @@ client = MongoClient('localhost', 27017)
 db = client.team18_OTV
 
 SECRET_KEY = 'team18' # 변경하였습니다
+
+last_data = list(db.reviews.find().limit(1).sort([('date', -1)]))
+
+if len(last_data) == 0:
+    review_id_num = 1
+else:
+    data = last_data[0]['review_id']
+    data_list = re.findall('\d+', data)
+    review_id_num = int(data_list[0]) + 1
 
 @app.route('/')
 def home():
@@ -157,6 +167,7 @@ def check_dup_nickname():
 
 @app.route('/api/reviews/<id>', methods=['POST'])  #리뷰 포스트
 def review_post(id):
+    global review_id_num
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -171,6 +182,8 @@ def review_post(id):
             "text": text_receive,
             "date": date_receive,
             "webtoon_id": int(id), #삭제 기능 추가 희망
+            "webtoon_id": int(id),
+            "review_id": 'review' + str(review_id_num),
         }
 
         db.reviews.insert_one(doc)
@@ -178,6 +191,9 @@ def review_post(id):
         return jsonify({"result": {
             "username": user_info["username"]
         }})
+        review_id_num += 1
+
+        return jsonify({"result": doc})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
