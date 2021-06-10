@@ -47,7 +47,9 @@
 }
 .likes-box {
     width: 100px;
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .detail {
     width: 600px;

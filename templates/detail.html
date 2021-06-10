@@ -37,7 +37,7 @@
                 </div>
                 <div class="likes-container">
                     <div class="likes-box">
-                        추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>
+{#                        추천 : <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span>#}
                         {% if check_like == false %}
                             <button class="likes like-btn" type="button"
                                     data-id={{ webtoon['id'] }} onclick="toggle_like({{ webtoon['id'] }})"><i
@@ -51,6 +51,7 @@
                                     aria-hidden="true"></i>
                             </button>
                         {% endif %}
+                    <div class="likes-text">× <span class="likes-count" data-num={{ webtoon['id'] }}>{{ webtoon['likes'] }}</span></div>
                     </div>
                     <div><a href="{{ webtoon['url'] }}"><button class="button">보러가기</button></a></div>
                 </div>
