@@ -26,6 +26,10 @@ else:
 
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+@app.route('/home')
+def main():
     token_receive = request.cookies.get('mytoken')
 
     try:

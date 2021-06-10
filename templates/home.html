@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>홈 | 오툰뷰</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body class="home-body">
+    <article class="greeting">
+            <div class="home-container">
+                <h1 class="home-title">오툰뷰</h1>
+                <p class="home-subtitle">오늘의 웹툰 리뷰</p>
+            </div>
+            <p class="home-description">웹툰, 무엇이든 추천해드립니다!</p>
+            <div class="home-btns">
+                <a href="/login" class="home-btn" type="button">로그인하기</a>
+                <a href="/join" class="home-btn" type="button">회원가입하기</a>
+            </div>
+    </article>
+</body>
+</html>
