@@ -19,75 +19,8 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
 
-    <script>
-
-            function login_blur() {
-            console.log("onblur 실행완료")
-            $("#login-box").removeClass("is-white is-shadow").addClass("is-blue")
-            $("#input-username").removeClass("is-white auto-input").addClass("is-blue off-auto-complete")
-            $("#input-password").removeClass("is-white").addClass("is-blue")
-            $("#login-btn").removeClass("is-white").addClass("is-blue")
-            $("#login-register-btn").removeClass("is-white").addClass("is-blue")
-            $(".id-box").removeClass("is-white").addClass("is-blue")
-            $(".password-box").removeClass("is-white").addClass("is-blue")
-            $(".fa-user").removeClass("is-white").addClass("is-blue")
-            $(".fa-lock").removeClass("is-white").addClass("is-blue")
-
-        }
-
-        function login_focus() {
-            console.log("onfocus 실행완료")
-            $("#login-box").removeClass("is-blue").addClass("is-white is-shadow")
-            $("#input-username").removeClass("is-blue off-auto-complete").addClass("is-white auto-complete")
-            $("#input-password").removeClass("is-blue").addClass("is-white")
-            $("#login-btn").removeClass("is-blue").addClass("is-white")
-            $("#login-register-btn").removeClass("is-blue").addClass("is-white")
-            $(".id-box").removeClass("is-blue").addClass("is-white")
-            $(".password-box").removeClass("is-blue").addClass("is-white")
-            $(".fa-user").removeClass("is-blue").addClass("is-white")
-            $(".fa-lock").removeClass("is-blue").addClass("is-white")
-
-        }
-
-        function sign_in() {
-            let username = $("#input-username").val()
-            let password = $("#input-password").val()
-
-            if (username == "") {
-                $("#help-id-login").text("아이디를 입력해주세요.")
-                $("#input-username").focus()
-                return;
-            } else {
-                $("#help-id-login").text("")
-            }
-
-            if (password == "") {
-                $("#help-password-login").text("비밀번호를 입력해주세요.")
-                $("#input-password").focus()
-                return;
-            } else {
-                $("#help-password-login").text("")
-            }
-            $.ajax({
-                type: "POST",
-                url: "/sign_in",
-                data: {
-                    username_give: username,
-                    password_give: password
-                },
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        $.cookie('mytoken', response['token'], {path: '/'}); //cookie 브라우저 데이터베이스(키-밸류형태로 저장) mytoken이라는 '키'가 실제 서버가 발행한 jwt토큰(response[token])을 저장하고 있다고 하고
-                        alert('로그인 성공!')
-                        window.location.replace("/main")
-                    } else {
-                        alert(response['msg'])
-                    }
-                }
-            });
-        }
-    </script>
 
 
 
