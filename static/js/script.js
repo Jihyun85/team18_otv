@@ -78,7 +78,9 @@ function saveReview(e) {
                         <div class="review-card">
                             <span class="review-name"><strong>${nickname}</strong></span>
                             <p class="review-text">${review}</p>
-                            <button onclick=deleteReview("${review_id}") class="delete" type="button"></button>
+                            <div class="delete-box">                            
+                                <button onclick=deleteReview("${review_id}"); class="delete" type="button"></button>
+                            </div>
                         </div>`;
             div.innerHTML = html_temp;
 
