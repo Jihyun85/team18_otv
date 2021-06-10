@@ -62,7 +62,6 @@ function saveReview(e) {
             'date_give': date,
         },
         success: function(res) {
-            // location.reload();
             const reviewsContainer = document.getElementById('reviewsContainer');
             const reviewCards = document.querySelectorAll('.review-card');
             const {nickname, _id: objectNum} = res.result;
@@ -90,8 +89,17 @@ function saveReview(e) {
     })
 }
 
-function deleteReview(id) {
-    console.log('delete!');
+function deleteReview(review_id) {
+    $.ajax({
+        type: "POST",
+        url: `/api/reviews/${review_id}/delete`,
+        data: {},
+        success: function(res) {
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            const target_review = document.getElementById(review_id);
+            reviewsContainer.removeChild(target_review);
+        }
+    })
 }
 
 
@@ -99,9 +107,6 @@ function init() {
     if (reviewForm) {
         reviewForm.addEventListener("submit", (e) => saveReview(e));
     }
-    // if (reviewDeleteBtn.length > 0) {
-    //     reviewDeleteBtn.forEach((btn) => btn.addEventListener("click", (id) => deleteReview(id)))
-    // }
 }
 
 init();

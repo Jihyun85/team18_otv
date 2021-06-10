@@ -182,17 +182,36 @@ def review_post(id):
             "text": text_receive,
             "date": date_receive,
             "webtoon_id": int(id), #삭제 기능 추가 희망
-            "webtoon_id": int(id),
             "review_id": 'review' + str(review_id_num),
         }
 
         db.reviews.insert_one(doc)
+
+        doc['_id'] = str(doc['_id']);
 
         review_id_num += 1
 
         return jsonify({"result": doc})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
+@app.route('/api/reviews/<review_id>/delete', methods=['POST'])
+def deleteReview(review_id):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        # target_data = db.reviews.find_one({'review_id': review_id, 'username': user_info})
+        # print(target_data)
+        db.reviews.delete_one({'review_id': review_id, 'username': user_info['username']})
+
+        return jsonify({'result': 'success'})
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

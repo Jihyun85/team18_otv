@@ -81,7 +81,8 @@
             {% for review in reviews %}
                 {% set nickname = review['nickname'] %}
                 {% set comment = review['text'] %}
-                <div class="review-container">
+                {% set review_id = review['review_id'] %}
+                <div class="review-container" id={{ review_id }}>
                     <div class="review-card">
                         <span class="review-name"><strong>{{ nickname }}</strong></span>
                         <p class="review-text">{{ comment }}</p>
@@ -90,7 +91,7 @@
                 </div>
             {% endfor %}
         </div>
-    <script src="{{ url_for('static', filename='/js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <div class="footer"></div>
 </div>
 </body>
