@@ -254,8 +254,8 @@
     /*color: var(--main-color);*/
     /*border: 1px solid #b5b5b5;*/
     margin: 36px 0px 10px;
-    font-size: 17px;
-    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+    font-size: 18px;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out, font-size 300ms ease-in-out;
 }
 
 @media (max-width: 768px) {
@@ -278,6 +278,7 @@
 .form-btn:hover {
     background-color: var(--dark-blue);
     color: white;
+    font-size: 21px;
 }
 
 /*----------------------------------------*/
