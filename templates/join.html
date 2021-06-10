@@ -60,6 +60,7 @@
             $(".fa-user").removeClass("is-blue").addClass("is-white")
             $(".fa-lock").removeClass("is-blue").addClass("is-white")
             $(".fa-star").removeClass("is-blue").addClass("is-white")
+
         }
 
 
@@ -84,6 +85,18 @@
             return regExp.test(asValue);
         }
 
+        function join_focus_id() {
+            console.log("onfocus 실행완료")
+            $("#input-username").val('')
+            $("#help-id").text("").removeClass("is-safe")
+        }
+
+        function join_focus_nickname() {
+            $("#input-nickname").val('')
+            $("#help-nickname").text("").removeClass("is-safe")
+        }
+
+
         function sign_up() {
             let username = $("#input-username").val()
             let nickname = $("#input-nickname").val()
@@ -91,20 +104,25 @@
             let password2 = $("#input-password2").val()
             console.log(username, nickname, password, password2)
 
-
-            if ($("#help-id").hasClass("is-danger")) {
-                alert("아이디를 다시 확인해주세요.")
+            if (username == "") {
+                $("#help-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                return;
+            } else if ($("#help-id").hasClass("is-danger")) {
+                $("#help-id").text("아이디를 확인해주세요.")
                 return;
             } else if (!$("#help-id").hasClass("is-success")) {
-                alert("아이디 중복확인을 해주세요.")
+                $("#help-id").text("아이디 중복확인을 해주세요.").addClass("is-danger")
                 return;
             }
 
-            if ($("#help-nickname").hasClass("is-danger")) {
-                alert("닉네임을 다시 확인해주세요.")
+            if (nickname == "") {
+                $("#help-nickname").text("닉네임을 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                return;
+            } else if ($("#help-nickname").hasClass("is-danger")) {
+                $("#help-nickname").text("닉네임을 확인해주세요.")
                 return;
             } else if (!$("#help-nickname").hasClass("is-success")) {
-                alert("닉네임 중복확인을 해주세요.")
+                $("#help-nickname").text("닉네임 중복확인을 해주세요.").addClass("is-danger")
                 return;
             }
 
@@ -151,12 +169,12 @@
             console.log(username)
             if (username == "") {
                 $("#help-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-                $("#input-username").focus()
+
                 return;
             }
             if (!is_id(username)) { //아이디 조건을 컴퓨터말로 적어준 거..., 아이디 조건 맞아서 true이면 밑에 아이디 형식 똑바로 하세요 안 띄워야하니까 !붙여서 true 아닌 false로
                 $("#help-id").text("아이디의 형식을 확인해주세요. 영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이").removeClass("is-safe").addClass("is-danger") //safe, danger 클래스를 먹이면 됨
-                $("#input-username").focus()
+
                 return;
             }
             $("#help-id").addClass("is-loading")
@@ -171,7 +189,7 @@
 
                     if (response["exists"]) {
                         $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
-                        $("#input-username").focus()
+
                     } else {
                         $("#help-id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-success")
                     }
@@ -186,12 +204,12 @@
             console.log(nickname)
             if (nickname == "") {
                 $("#help-nickname").text("닉네임을 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-                $("#input-nickname").focus()
+
                 return;
             }
             if (!is_nickname(nickname)) {
                 $("#help-nickname").text("닉네임의 형식을 확인해주세요. 한글, 영문, 숫자 사용 가능. 2-10자 길이").removeClass("is-safe").addClass("is-danger") //safe, danger 클래스를 먹이면 됨
-                $("#input-nickname").focus()
+
                 return;
             }
             $("#help-nick").addClass("is-loading")
@@ -206,7 +224,7 @@
 
                     if (response["exists"]) {
                         $("#help-nickname").text("이미 존재하는 닉네임입니다.").removeClass("is-safe").addClass("is-danger")
-                        $("#input-nickname").focus()
+
                     } else {
                         $("#help-nickname").text("사용할 수 있는 닉네임입니다.").removeClass("is-danger").addClass("is-success")
                     }
@@ -233,7 +251,7 @@
             <div id="login-box" class="box is-blue">
                 <div class="id-field">   <!-- 아이디, 중복확인-->
                     <div class="input-check-box id-check-box control has-icons-left"> <!--아이디-->
-                        <input onblur="login_blur()" onfocus="login_focus()" id="input-username" class="join-check-input is-blue" type="text" placeholder="아이디">
+                        <input onblur="login_blur()" onfocus="login_focus(), join_focus_id()" id="input-username" class="join-check-input is-blue" type="text" placeholder="아이디">
                         <span class="icon is-small is-left"><i class="fa fa-user is-blue"></i></span>
                     </div>
                      <button class="join-btn btn-check is-blue" onclick="check_dup_id()">중복확인</button>
@@ -246,7 +264,7 @@
 
                 <div class="nickname-field">   <!-- 닉네임, 중복확인, 아이디 조건-->
                     <div class="input-check-box nickname-check-box control has-icons-left">
-                        <input onblur="login_blur()" onfocus="login_focus()" id="input-nickname" class="join-check-input is-blue" type="text" placeholder="닉네임">
+                        <input onblur="login_blur()" onfocus="login_focus(), join_focus_nickname()" id="input-nickname" class="join-check-input is-blue" type="text" placeholder="닉네임">
                         <span class="icon is-small is-left"><i class="fa fa-star is-blue"></i></span>
                     </div>
                     <button class="join-btn btn-check is-blue" onclick="check_dup_nickname()">중복확인</button>
