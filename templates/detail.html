@@ -88,9 +88,9 @@
                         <span class="review-name"><strong>{{ nickname }}</strong></span>
                         <p class="review-text">{{ comment }}</p>
                         {% if review['accessible'] == 'true' %}
-                            <button onclick="deleteReview('{{ review_id }}')" class="delete" type="button"></button>
+                            <div class="delete-box"><button onclick="deleteReview('{{ review_id }}')" class="delete" type="button"></button></div>
                         {% else %}
-                            <button onclick="deleteReview('{{ review_id }}')" class="delete is-hidden" type="button"></button>
+                            <div class="delete-box"><button onclick="deleteReview('{{ review_id }}')" class="delete is-hidden" type="button"></button></div>
                         {% endif %}
                     </div>
                 </div>

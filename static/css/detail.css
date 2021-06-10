@@ -208,7 +208,14 @@
 }
 .delete {
     background-color: #90caf9;
+
+}
+.delete-box {
     margin: 0px 30px 0px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*width: 80px;*/
 }
 .footer {
     background: #fff;
